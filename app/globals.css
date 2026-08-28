@@ -4703,6 +4703,220 @@ a,
 }
 
 /* =========================
+   CONSISTENT SECTION SYSTEM
+========================= */
+
+:root {
+  --site-blue: #315cff;
+  --site-ink: #1c2e52;
+  --site-muted: #52617a;
+  --site-rule: #dce3ee;
+  --site-mono: "Space Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+.about-section,
+.play-section,
+.writings-section,
+.portfolio-section {
+  min-height: 100vh;
+  padding: 72px 8% 90px;
+  background: #ffffff;
+  background-image: none;
+  color: var(--site-ink);
+}
+
+.about-section::after,
+.play-section::after,
+.writings-section::after,
+.portfolio-section::after {
+  background: var(--site-blue);
+}
+
+.section-home-button,
+.section-next-button {
+  color: var(--site-blue);
+  font-family: var(--site-mono);
+  font-size: 11px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.section-home-button:hover,
+.section-next-button:hover {
+  color: #173cc4;
+}
+
+.about-number,
+.section-number,
+.recently-published,
+.article-top,
+.article-bottom,
+.play-project-number,
+.play-project-arrow,
+.mini-project-number,
+.mini-project-arrow,
+.company-yc,
+.article-arrow,
+.reader-kicker,
+.reader-link,
+.work-item-number,
+.work-item-arrow,
+.work-item-meta,
+.experience-label,
+.experience-item > span {
+  color: var(--site-blue);
+  font-family: var(--site-mono);
+}
+
+.about-number,
+.recently-published,
+.article-card,
+.writing-coming-soon,
+.mini-project-row,
+.play-project-list,
+.play-project-item,
+.work-list,
+.experience-item,
+.contact-links {
+  border-color: var(--site-rule);
+}
+
+.about-copy h2,
+.about-copy h3,
+.play-top h2,
+.play-project-heading h3,
+.writings-top h2,
+.article-content h3,
+.writing-coming-soon h3,
+.contact-content h2,
+.work-content h2,
+.work-item-heading h3,
+.experience-item h3 {
+  color: var(--site-ink);
+  font-family: var(--site-mono);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.about-copy p,
+.play-project-item p,
+.article-content p,
+.contact-content > p,
+.work-item p,
+.experience-intro,
+.favorite-item p {
+  color: var(--site-muted);
+  font-family: var(--site-mono);
+}
+
+.about-highlight,
+.reader-link,
+.contact-links a {
+  color: var(--site-blue);
+  text-decoration-color: var(--site-blue);
+}
+
+.play-project-item:hover .play-project-heading h3,
+.work-item:hover,
+.contact-links a:hover {
+  color: var(--site-blue);
+}
+
+.mini-project-title,
+.work-item-meta,
+.contact-links,
+.contact-links a,
+.article-bottom,
+.article-top {
+  font-family: var(--site-mono);
+}
+
+.article-reader-backdrop {
+  background: rgba(28, 46, 82, 0.28);
+}
+
+.article-reader,
+.case-modal,
+.dataoric-brief-sheet {
+  border-radius: 2px;
+  border-color: var(--site-rule);
+}
+
+.article-reader,
+.case-modal {
+  background: #ffffff;
+}
+
+.article-reader-header button {
+  border-radius: 2px;
+  border-color: var(--site-blue);
+  color: var(--site-blue);
+  font-family: var(--site-mono);
+}
+
+.contact-link-mark {
+  border-radius: 2px;
+  border-color: var(--site-blue);
+}
+
+.case-backdrop {
+  background: #ffffff;
+}
+
+.case-title,
+.case-statement,
+.article-reader-body h3,
+.dataoric-brief-sheet strong {
+  color: var(--site-ink);
+  font-family: var(--site-mono);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.case-desc,
+.case-body,
+.case-panel-copy,
+.case-meta-item p,
+.case-filelist li,
+.case-tree-list li,
+.case-feedback p,
+.dataoric-brief-sheet p {
+  color: var(--site-muted);
+  font-family: var(--site-mono);
+}
+
+.case-kicker,
+.case-meta-item span,
+.case-panel-img-label,
+.dataoric-brief-sheet span,
+.dataoric-brief-sheet small,
+.case-footer-link {
+  color: var(--site-blue);
+  font-family: var(--site-mono);
+}
+
+.case-topbar,
+.case-divider,
+.case-section,
+.case-footer {
+  border-color: var(--site-rule);
+}
+
+.case-hero-right,
+.dataoric-brief-preview,
+.case-panel-img,
+.case-feedback {
+  background: #f7f9fc;
+  border-color: var(--site-rule);
+  border-radius: 2px;
+}
+
+.case-icon-btn,
+.case-footer-link {
+  color: var(--site-blue);
+}
+
+/* =========================
    REFINED MONOCHROME BLUE THEME
 ========================= */
 
