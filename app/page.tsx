@@ -1,69 +1,554 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
 
 export default function Home() {
+  // playProjects moved to /lib/playProjects.ts
+  // keep a local fallback if import fails
+  let playProjectsLocal = [] as any[];
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const mod = require("../lib/playProjects");
+    playProjectsLocal = mod.playProjects || [];
+  } catch (e) {
+    playProjectsLocal = [];
+  }
+
+  const substackUrl =
+    "https://substack.com/home/post/p-206762963";
+
+  const featuredProjects = playProjectsLocal.filter(
+    (project) => !project.slug.includes("take-home")
+  );
+
+  const takeHomeProjects = playProjectsLocal.filter(
+    (project) => project.slug.includes("take-home")
+  );
+
+  const [showArticleReader, setShowArticleReader] =
+    useState(false);
+
+  const scrollToHome = () => {
+    scrollToSection("home");
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    document
+      .getElementById(sectionId)
+      ?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <main id="home" className="home">
+        <div className="notebook-shell">
+          <div className="notebook-cover">
+            <div className="notebook-topline">
+              <span>FIELD NOTES / 2026</span>
+              <span>ESHA MITTAL</span>
+            </div>
+
+          </div>
+
+          <div className="notebook-page">
+            <div className="notebook-page-heading">
+              <span>INDEX</span>
+              <span>EST. 2024 / SF</span>
+            </div>
+            <p className="notebook-intro">Hi, I&apos;m Esha. I like complicated systems, early ideas, and questions that refuse to stay solved.</p>
+
+            <nav className="notebook-index" aria-label="Portfolio sections">
+              <a href="#about"><span>01</span><strong>About</strong><em>the person behind the questions</em></a>
+              <a href="#play"><span>02</span><strong>Work &amp; experiments</strong><em>things I&apos;ve tried in the real world</em></a>
+              <a href="#writings"><span>03</span><strong>Writings</strong><em>notes from the rabbit holes</em></a>
+              <a href="#contact"><span>04</span><strong>Contact</strong><em>say hello</em></a>
+            </nav>
+
+            <div className="notebook-footer">
+              <span>San Francisco, CA</span>
+              <span>↻ updated Aug 2026</span>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
       </main>
-    </div>
+
+
+      {/* =========================
+          ABOUT
+      ========================= */}
+
+      <section
+        id="about"
+        className="about-section"
+      >
+        <div className="section-ipod-nav section-ipod-nav--inside" aria-label="Home navigation">
+          <button
+            type="button"
+            className="section-home-button"
+            onClick={scrollToHome}
+            aria-label="Return to the iPod home"
+          >
+            <span aria-hidden="true">&larr;</span> back to notebook
+          </button>
+        </div>
+
+        <div className="about-number">
+          01 / ABOUT
+        </div>
+
+        <div className="about-content">
+          <div className="about-copy">
+            <h2>A little about me</h2>
+
+            <p>
+              I recently graduated from Arizona State University. Most recently, I worked on expansion strategy at <a href="https://www.wearewarp.com/" target="_blank" rel="noreferrer" className="about-highlight">Warp</a>.
+            </p>
+
+            <p>
+              Before that, I worked on automating data workflows at <a href="https://spx.com/" target="_blank" rel="noreferrer" className="about-highlight">SPX</a> and evaluated early-stage companies and investment opportunities at a VC firm, contributing to a $1.5M funding round.
+            </p>
+
+            <p>
+              I also spent time doing neuroscience research, studying whether variations in a bitter taste receptor gene could be connected to late-onset Alzheimer&apos;s disease and schizophrenia, and received an <a href="https://sols.asu.edu/research/solur/symposium" target="_blank" rel="noreferrer" className="about-highlight">Honorable Mention</a> for the work at ASU&apos;s Undergraduate Research Poster Symposium.
+            </p>
+
+            <p>
+              I&apos;m insanely fascinated by the brain.. how something so complex can produce memory, emotion, movement, and everything in between. I also have a pretty bad habit of not leaving unsolved problems alone; if something doesn&apos;t make sense to me, I keep digging until I figure it out.
+            </p>
+
+            <p>
+              I was also selected as an AI/ML Fellow through Cornell Tech&apos;s <a href="https://tech.cornell.edu/impact/break-through-tech/" target="_blank" rel="noreferrer" className="about-highlight">Break Through Tech AI Program</a>.
+            </p>
+
+            <h3>Outside of work</h3>
+
+            <p>
+              <span className="about-highlight">Music</span> has been a huge part of my life. I sing, play instruments, and have been around music for as long as I can remember.
+            </p>
+
+            <p>
+              I&apos;m also trained in Indian classical singing. And when I&apos;m not doing either of those, there&apos;s a good chance I&apos;m <span className="about-highlight">coloring</span>.
+            </p>
+
+            <p>
+              So, basically, I spend my time either overthinking something or coloring it in.
+            </p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="section-next-button"
+          onClick={() => scrollToSection("play")}
+        >
+          Play <span aria-hidden="true">&rarr;</span>
+        </button>
+      </section>
+
+
+      {/* =========================
+          PLAY
+      ========================= */}
+
+      <section
+        id="play"
+        className="play-section"
+      >
+        <div className="section-ipod-nav section-ipod-nav--inside" aria-label="Home navigation">
+          <button
+            type="button"
+            className="section-home-button"
+            onClick={scrollToHome}
+            aria-label="Return to the iPod home"
+          >
+            <span aria-hidden="true">&larr;</span> back to notebook
+          </button>
+        </div>
+
+        <div className="play-top">
+          <span className="section-number">02 / PLAY</span>
+
+          <h2>A collection of experiments, projects, work samples, and more.</h2>
+
+          <p className="play-subtitle">
+            
+          </p>
+      </div>
+
+        <div className="play-project-list">
+          {featuredProjects.map((project, index) => {
+            const linkedProject = project.url && project.url !== "#";
+            const projectContent = (
+              <>
+                <div className="play-project-heading">
+                  <span className="play-project-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <h3>{project.title}</h3>
+                </div>
+
+                <p>{project.summary}</p>
+              </>
+            );
+
+            return linkedProject ? (
+              <a
+                key={project.slug}
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="play-project-item"
+              >
+                {projectContent}
+              </a>
+            ) : (
+              <div key={project.slug} className="play-project-item">
+                {projectContent}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="recently-published">
+          <span>
+            WORK SAMPLES
+          </span>
+
+          <span>
+            ↓
+          </span>
+        </div>
+
+        {takeHomeProjects.map((project, idx) => (
+          <a
+            key={project.slug}
+            href={`/play/${project.slug}`}
+            className="mini-project-row"
+          >
+            <div className="mini-project-meta">
+              <span className="mini-project-number">
+                {String(idx + 1).padStart(2, "0")}
+              </span>
+
+              <div className="mini-project-copy">
+                <span className="mini-project-title">
+                  {project.logo && (
+                    <img
+                      src={project.logo}
+                      alt=""
+                      className="mini-project-logo"
+                    />
+                  )}
+
+                  <span>
+                    {project.companyLabel || project.title}
+                  </span>
+
+                  {project.yc && (
+                    <span className="company-yc">
+                      (YC {project.yc})
+                    </span>
+                  )}
+                </span>
+              </div>
+            </div>
+
+            <span
+              className="mini-project-arrow"
+              aria-label={`Open ${project.title}`}
+            >
+              ↗
+            </span>
+          </a>
+        ))}
+
+        <button
+          type="button"
+          className="section-next-button"
+          onClick={() => scrollToSection("writings")}
+        >
+          Writings <span aria-hidden="true">&rarr;</span>
+        </button>
+      </section>
+
+
+      {/* =========================
+          WRITINGS
+      ========================= */}
+
+      <section
+        id="writings"
+        className="writings-section"
+      >
+        <div className="section-ipod-nav section-ipod-nav--inside" aria-label="Home navigation">
+          <button
+            type="button"
+            className="section-home-button"
+            onClick={scrollToHome}
+            aria-label="Return to the iPod home"
+          >
+            <span aria-hidden="true">&larr;</span> back to notebook
+          </button>
+        </div>
+
+
+        {/* WRITINGS INTRO */}
+
+        <div className="writings-top">
+
+          <span className="section-number">
+            03 / WRITINGS
+          </span>
+
+
+          
+          
+          
+        </div>
+
+
+        {/* RECENTLY PUBLISHED */}
+
+        <div className="recently-published">
+
+          <span>
+            RECENTLY PUBLISHED
+          </span>
+
+          <span>
+            ↓
+          </span>
+
+        </div>
+
+
+        {/* =========================
+            ARTICLE 01
+        ========================= */}
+
+        <a
+          href={substackUrl}
+          rel="noopener noreferrer"
+          className="article-card"
+          onClick={(event) => {
+            event.preventDefault();
+            setShowArticleReader(true);
+          }}
+        >
+
+          <div className="article-top">
+
+            <span>
+              01
+            </span>
+
+            <span>
+              SUBSTACK
+            </span>
+
+          </div>
+
+
+          <div className="article-content">
+
+            <h3>
+              Everyone Told Me My Twenties Would Bring Clarity.
+            </h3>
+
+            <p>
+              A small reflection on not having it all figured out.
+            </p>
+
+          </div>
+
+
+          <div className="article-bottom">
+
+            <span>
+              READ ARTICLE
+            </span>
+
+            <span className="article-arrow">
+              ↗
+            </span>
+
+          </div>
+
+        </a>
+
+        {showArticleReader && (
+          <div
+            className="article-reader-backdrop"
+            onClick={() => setShowArticleReader(false)}
+          >
+            <div
+              className="article-reader"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="article-reader-header">
+                <button
+                  type="button"
+                  onClick={() => setShowArticleReader(false)}
+                >
+                  Close
+                </button>
+              </div>
+
+              <div className="article-reader-body">
+                <span className="reader-kicker">
+                  SUBSTACK
+                </span>
+
+                <h3>
+                  Everyone Told Me My Twenties Would Bring Clarity.
+                </h3>
+
+                <p>
+                   A small reflection on not having it all figured out.
+                </p>
+
+                <a
+                  href={substackUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="reader-link"
+                >
+                  Read on Substack
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+
+
+        {/* =========================
+            COMING SOON
+        ========================= */}
+
+        <div className="article-card writing-coming-soon">
+          <div className="article-top">
+            <span>
+              02
+            </span>
+
+            <span>
+              &nbsp;
+            </span>
+          </div>
+
+          <div className="article-content">
+            <h3>
+              more coming soon..
+            </h3>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="section-next-button"
+          onClick={() => scrollToSection("contact")}
+        >
+          Contact <span aria-hidden="true">&rarr;</span>
+        </button>
+
+      </section>
+
+
+      {/* =========================
+          CONTACT
+      ========================= */}
+
+      <section
+        id="contact"
+        className="portfolio-section"
+      >
+        <div className="section-ipod-nav section-ipod-nav--inside" aria-label="Home navigation">
+          <button
+            type="button"
+            className="section-home-button"
+            onClick={scrollToHome}
+            aria-label="Return to the iPod home"
+          >
+            <span aria-hidden="true">&larr;</span> back to notebook
+          </button>
+        </div>
+
+        <div className="contact-content">
+          <span className="section-number">04 / CONTACT</span>
+
+          <h2>Let&apos;s chat!</h2>
+
+          <p>
+            I&apos;m currently looking for what&apos;s next. If you&apos;d like to talk about the brain, data, tech, startups, or an interesting problem, I&apos;d love to hear from you.
+          </p>
+
+          <div className="contact-links" aria-label="Contact links">
+            <a href="mailto:emittal@asu.edu" aria-label="Email Esha">
+              <span className="contact-link-mark">
+                <img src="https://cdn.simpleicons.org/gmail" alt="" />
+              </span>
+              <span>Email</span>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <span className="contact-link-mark">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM3.56 20.45h3.56V9H3.56v11.45z" />
+                </svg>
+              </span>
+              <span>LinkedIn</span>
+            </a>
+
+            <a
+              href="https://substack.com/@eshamittall"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Substack"
+            >
+              <span className="contact-link-mark">
+                <img src="https://cdn.simpleicons.org/substack" alt="" />
+              </span>
+              <span>Substack</span>
+            </a>
+
+            <a
+              href="https://github.com/esha-sm"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <span className="contact-link-mark">
+                <img src="https://cdn.simpleicons.org/github" alt="" />
+              </span>
+              <span>GitHub</span>
+            </a>
+
+            <a
+              href="https://x.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X"
+            >
+              <span className="contact-link-mark">
+                <img src="https://cdn.simpleicons.org/x" alt="" />
+              </span>
+              <span>X</span>
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+    </>
   );
 }
