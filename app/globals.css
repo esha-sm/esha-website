@@ -4408,6 +4408,126 @@ section[id] {
 }
 
 /* =========================
+   PLAIN INDEX HOME
+========================= */
+
+.home {
+  min-height: 100vh;
+  padding: 42px 5.5vw 52px;
+  background: #ffffff;
+}
+
+.plain-index {
+  display: flex;
+  flex-direction: column;
+  width: min(1180px, 100%);
+  min-height: calc(100vh - 94px);
+  margin: 0 auto;
+}
+
+.plain-index-header,
+.plain-index-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: #315cff;
+  font-family: "Space Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.plain-index-intro {
+  max-width: 620px;
+  margin: auto 0 86px;
+}
+
+.plain-index-intro h1 {
+  margin: 0;
+  color: #1c2e52;
+  font-family: "Space Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.plain-index-intro p {
+  max-width: 480px;
+  margin: 20px 0 0;
+  color: #52617a;
+  font-family: "Space Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.plain-index-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 6vw, 90px);
+}
+
+.plain-index-group h2 {
+  margin: 0 0 18px;
+  color: #1c2e52;
+  font-family: "Space Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.plain-index-group a {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px dotted #b9c5d9;
+  color: #1c2e52;
+  font-family: "Space Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.plain-index-group a:hover {
+  color: #315cff;
+}
+
+.plain-index-group a span {
+  flex: 0 0 auto;
+  color: #315cff;
+}
+
+.plain-index-footer {
+  margin-top: auto;
+  padding-top: 72px;
+  border-top: 1px solid #dce3ee;
+}
+
+@media (max-width: 700px) {
+  .home {
+    padding: 28px 22px 38px;
+  }
+
+  .plain-index {
+    min-height: calc(100vh - 66px);
+  }
+
+  .plain-index-intro {
+    margin: 100px 0 64px;
+  }
+
+  .plain-index-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .plain-index-footer {
+    margin-top: 64px;
+    padding-top: 28px;
+    font-size: 9px;
+  }
+}
+
+/* =========================
    GLOBAL EDITORIAL SYSTEM
 ========================= */
 

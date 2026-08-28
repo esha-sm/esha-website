@@ -44,34 +44,37 @@ export default function Home() {
   return (
     <>
       <main id="home" className="home">
-        <div className="notebook-shell">
-          <div className="notebook-cover">
-            <div className="notebook-topline">
-              <span>FIELD NOTES / 2026</span>
-              <span>ESHA MITTAL</span>
-            </div>
+        <div className="plain-index">
+          <header className="plain-index-header">
+            <span>ESHA MITTAL</span>
+            <span>PORTFOLIO / 2026</span>
+          </header>
 
+          <div className="plain-index-intro">
+            <h1>Hi, I&apos;m Esha.</h1>
+            <p>Strategy, data, research, and the work of figuring things out.</p>
           </div>
 
-          <div className="notebook-page">
-            <div className="notebook-page-heading">
-              <span>INDEX</span>
-              <span>EST. 2024 / SF</span>
+          <nav className="plain-index-grid" aria-label="Portfolio sections">
+            <div className="plain-index-group">
+              <h2>01. ABOUT</h2>
+              <a href="#about">About me <span>→</span></a>
+              <a href="#contact">Contact <span>→</span></a>
             </div>
-            <p className="notebook-intro">Hi, I&apos;m Esha. I like complicated systems, early ideas, and questions that refuse to stay solved.</p>
-
-            <nav className="notebook-index" aria-label="Portfolio sections">
-              <a href="#about"><span>01</span><strong>About</strong><em>the person behind the questions</em></a>
-              <a href="#play"><span>02</span><strong>Work &amp; experiments</strong><em>things I&apos;ve tried in the real world</em></a>
-              <a href="#writings"><span>03</span><strong>Writings</strong><em>notes from the rabbit holes</em></a>
-              <a href="#contact"><span>04</span><strong>Contact</strong><em>say hello</em></a>
-            </nav>
-
-            <div className="notebook-footer">
-              <span>San Francisco, CA</span>
-              <span>↻ updated Aug 2026</span>
+            <div className="plain-index-group">
+              <h2>02. WORK</h2>
+              <a href="#play">Projects &amp; experiments <span>→</span></a>
             </div>
-          </div>
+            <div className="plain-index-group">
+              <h2>03. NOTES</h2>
+              <a href="#writings">Writings <span>→</span></a>
+            </div>
+          </nav>
+
+          <footer className="plain-index-footer">
+            <span>San Francisco, CA</span>
+            <span>UPDATED AUG 2026</span>
+          </footer>
         </div>
 
       </main>
@@ -92,7 +95,7 @@ export default function Home() {
             onClick={scrollToHome}
             aria-label="Return to the iPod home"
           >
-            <span aria-hidden="true">&larr;</span> back to notebook
+            <span aria-hidden="true">&larr;</span> back to index
           </button>
         </div>
 
@@ -165,7 +168,7 @@ export default function Home() {
             onClick={scrollToHome}
             aria-label="Return to the iPod home"
           >
-            <span aria-hidden="true">&larr;</span> back to notebook
+            <span aria-hidden="true">&larr;</span> back to index
           </button>
         </div>
 
@@ -292,7 +295,7 @@ export default function Home() {
             onClick={scrollToHome}
             aria-label="Return to the iPod home"
           >
-            <span aria-hidden="true">&larr;</span> back to notebook
+            <span aria-hidden="true">&larr;</span> back to index
           </button>
         </div>
 
@@ -474,7 +477,7 @@ export default function Home() {
             onClick={scrollToHome}
             aria-label="Return to the iPod home"
           >
-            <span aria-hidden="true">&larr;</span> back to notebook
+            <span aria-hidden="true">&larr;</span> back to index
           </button>
         </div>
 
