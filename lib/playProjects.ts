@@ -42,9 +42,9 @@ export const playProjects = [
     yc: "W19",
     type: "Product",
     summary:
-      "AI card scanning for checkout and fraud prevention.",
+      "Dyneti builds AI-powered technology that helps businesses detect fraudulent payment cards and prevent checkout fraud.",
     description:
-      "Dyneti uses AI to scan payment cards and verify them in real time, helping businesses speed up checkout while preventing fraudulent transactions.",
+      "Dyneti builds AI-powered technology that helps businesses detect fraudulent payment cards and prevent checkout fraud.",
     tags: ["Product", "Go-to-Market", "Research", "Strategy"],
     timeline: "2024",
     role: "Product thinking",
