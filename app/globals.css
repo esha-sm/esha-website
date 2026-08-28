@@ -6350,7 +6350,7 @@ a,
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 28px;
+  gap: 0;
   height: auto;
   padding: 48px 34px 42px 28px;
   border-right: 1px solid #dce3ee;
