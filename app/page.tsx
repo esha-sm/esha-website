@@ -145,7 +145,7 @@ export default function Home() {
             <a className="about-site-label" href="#home">ESHA MITTAL</a>
             <div className="about-sidebar-group">
               <span>01. ABOUT</span>
-              <a className="is-active" href="#about">About me</a>
+              <a className="is-active" href="#about">ABOUT ME</a>
               <a href="#play">Play</a>
               <a href="#writings">Writings</a>
               <a href="#contact">Contact</a>

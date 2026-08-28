@@ -6378,7 +6378,7 @@ a,
 
 .about-index-back {
   width: fit-content;
-  margin-top: auto;
+  margin-top: 0;
 }
 
 .about-reference-article {
@@ -6623,4 +6623,22 @@ a,
   .about-reference-header h2 {
     font-size: 30px;
   }
+}
+/* ABOUT ME heading */
+.about-reference-header h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 38px;
+  font-weight: 400;
+  color: #1c2e52;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+/* Description */
+.about-reference-header p {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: #52617a;
+  line-height: 1.6;
 }
