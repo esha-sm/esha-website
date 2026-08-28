@@ -44,44 +44,28 @@ export default function Home() {
   return (
     <>
       <main id="home" className="home">
-        <div className="whiteboard">
-          <div className="whiteboard-heading">
+        <div className="section-line-page">
+          <header className="section-line-header">
             <span>ESHA MITTAL</span>
             <span>PORTFOLIO / 2026</span>
-          </div>
+          </header>
 
-          <div className="whiteboard-welcome">
+          <div className="section-line-intro">
             <h1>Hi, I&apos;m Esha.</h1>
-            <p>Welcome to my little space. Have fun!</p>
+            <p>Strategy, data, research, and the work of figuring things out.</p>
           </div>
 
-          <nav className="sticky-note-board" aria-label="Portfolio sections">
-            <a className="sticky-note sticky-note--about" href="#about">
-              <span>01</span>
-              <strong>About</strong>
-              <em>get to know me</em>
-            </a>
-            <a className="sticky-note sticky-note--play" href="#play">
-              <span>02</span>
-              <strong>Play</strong>
-              <em>work &amp; experiments</em>
-            </a>
-            <a className="sticky-note sticky-note--writings" href="#writings">
-              <span>03</span>
-              <strong>Writings</strong>
-              <em>notes from the rabbit holes</em>
-            </a>
-            <a className="sticky-note sticky-note--contact" href="#contact">
-              <span>04</span>
-              <strong>Contact</strong>
-              <em>say hello</em>
-            </a>
+          <nav className="section-line-nav" aria-label="Portfolio sections">
+            <a href="#about"><span className="section-line-dot" /><strong>About</strong><em>01</em></a>
+            <a href="#play"><span className="section-line-dot" /><strong>Play</strong><em>02</em></a>
+            <a href="#writings"><span className="section-line-dot" /><strong>Writings</strong><em>03</em></a>
+            <a href="#contact"><span className="section-line-dot" /><strong>Contact</strong><em>04</em></a>
           </nav>
 
-          <div className="whiteboard-footer">
+          <footer className="section-line-footer">
             <span>San Francisco, CA</span>
             <span>UPDATED AUG 2026</span>
-          </div>
+          </footer>
         </div>
 
       </main>
