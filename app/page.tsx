@@ -45,15 +45,31 @@ export default function Home() {
     <>
       <main id="home" className="home">
         <div className="open-book" aria-label="Portfolio index">
-          <section className="book-page book-page--index">
+          <section className="book-page book-page--title">
             <div className="book-page-topline">
               <span>ESHA MITTAL</span>
               <span>01</span>
             </div>
 
+            <div className="book-title-content">
+              <h2>Hi, I&apos;m Esha.</h2>
+              <p>Welcome to my little space. Have fun</p>
+            </div>
+
+            <div className="book-page-footer">
+              <span>San Francisco, CA</span>
+              <span>UPDATED AUG 2026</span>
+            </div>
+          </section>
+
+          <section className="book-page book-page--index">
+            <div className="book-page-topline">
+              <span>FIELD NOTES</span>
+              <span>02</span>
+            </div>
+
             <div className="book-page-heading">
               <span>CONTENTS</span>
-              <h1>INDEX</h1>
             </div>
 
             <nav className="book-index-list" aria-label="Portfolio sections">
@@ -64,24 +80,7 @@ export default function Home() {
             </nav>
 
             <div className="book-page-footer">
-              <span>PORTFOLIO / 2026</span>
               <span>ESHA MITTAL</span>
-            </div>
-          </section>
-
-          <section className="book-page book-page--title">
-            <div className="book-page-topline">
-              <span>FIELD NOTES</span>
-              <span>02</span>
-            </div>
-
-            <div className="book-title-content">
-              <h2>Hi, I&apos;m Esha.</h2>
-              <p>Strategy, data, research, and the work of figuring things out.</p>
-            </div>
-
-            <div className="book-page-footer">
-              <span>San Francisco, CA</span>
               <span>UPDATED AUG 2026</span>
             </div>
           </section>

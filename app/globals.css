@@ -5398,6 +5398,10 @@ a,
 }
 
 .book-page--index {
+  border-left: 1px solid #dce3ee;
+}
+
+.book-page--title {
   border-right: 1px solid #dce3ee;
 }
 
