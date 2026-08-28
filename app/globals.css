@@ -6784,3 +6784,115 @@ a,
     font-size: 13px;
   }
 }
+
+/* =========================
+   FINAL SITE CONSISTENCY
+========================= */
+
+.about-reference-article .about-copy p {
+  color: #000000;
+}
+
+.play-section,
+.writings-section,
+.portfolio-section {
+  background: #ffffff;
+  color: var(--site-ink);
+  font-family: var(--site-mono);
+}
+
+.play-top h2,
+.writings-top h2,
+.contact-content h2,
+.play-project-heading h3,
+.article-content h3,
+.writing-coming-soon h3 {
+  color: var(--site-ink);
+  font-family: var(--site-mono);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.play-project-item p,
+.article-content p,
+.contact-content > p,
+.writing-coming-soon p {
+  color: var(--site-muted);
+  font-family: var(--site-mono);
+}
+
+.play-project-item,
+.article-card,
+.writing-coming-soon,
+.mini-project-row,
+.recently-published,
+.contact-links {
+  border-color: var(--site-rule);
+}
+
+.article-card,
+.mini-project-row {
+  background: #ffffff;
+}
+
+.contact-links,
+.contact-links a,
+.contact-link-mark,
+.section-next-button,
+.section-home-button {
+  font-family: var(--site-mono);
+}
+
+.contact-links a,
+.contact-link-mark,
+.section-next-button,
+.section-home-button,
+.reader-link,
+.article-arrow,
+.mini-project-arrow {
+  color: var(--site-blue);
+}
+
+.case-backdrop,
+.case-modal,
+.case-section,
+.case-hero-right,
+.dataoric-brief-preview,
+.case-panel-img,
+.case-feedback {
+  background: #ffffff;
+}
+
+.case-modal,
+.case-topbar,
+.case-divider,
+.case-section,
+.case-footer,
+.case-panel-img,
+.case-feedback {
+  border-color: var(--site-rule);
+}
+
+.case-title,
+.case-statement,
+.case-meta-item p,
+.case-body,
+.case-desc,
+.case-filelist li,
+.case-tree-list li,
+.case-feedback p,
+.dataoric-brief-sheet strong,
+.dataoric-brief-sheet p {
+  color: var(--site-ink);
+  font-family: var(--site-mono);
+}
+
+.case-kicker,
+.case-meta-item span,
+.case-panel-img-label,
+.case-footer-link,
+.dataoric-brief-sheet span,
+.dataoric-brief-sheet small {
+  color: var(--site-blue);
+  font-family: var(--site-mono);
+}

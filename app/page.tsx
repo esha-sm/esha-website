@@ -33,6 +33,34 @@ export default function Home() {
     scrollToSection("home");
   };
 
+  const playBookSound = () => {
+    const AudioContextConstructor =
+      window.AudioContext ||
+      (window as typeof window & { webkitAudioContext?: typeof AudioContext })
+        .webkitAudioContext;
+
+    if (!AudioContextConstructor) return;
+
+    const audioContext = new AudioContextConstructor();
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(420, audioContext.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(
+      760,
+      audioContext.currentTime + 0.08
+    );
+    gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.045, audioContext.currentTime + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.14);
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.14);
+  };
+
   const scrollToSection = (sectionId: string) => {
     document
       .getElementById(sectionId)
@@ -48,7 +76,10 @@ export default function Home() {
         <button
           type="button"
           className="book-toggle"
-          onClick={() => setIsBookOpen((open) => !open)}
+          onClick={() => {
+            playBookSound();
+            setIsBookOpen((open) => !open);
+          }}
           aria-expanded={isBookOpen}
           aria-label={isBookOpen ? "Close book" : "Open book"}
         >
@@ -115,31 +146,21 @@ export default function Home() {
             <div className="about-sidebar-group">
               <span>01. ABOUT</span>
               <a className="is-active" href="#about">About me</a>
-              <a href="#play">Work &amp; experiments</a>
+              <a href="#play">Play</a>
               <a href="#writings">Writings</a>
               <a href="#contact">Contact</a>
             </div>
-            <button
-              type="button"
-              className="section-home-button about-index-back"
-              onClick={scrollToHome}
-              aria-label="Return to the index"
-            >
-              &larr; back to index
-            </button>
           </aside>
 
           <article className="about-reference-article">
             <div className="about-reference-breadcrumb">
               <span>ABOUT</span>
               <span>/</span>
-              <strong>WHO IS ESHA?</strong>
+              <strong>ABOUT ME</strong>
             </div>
 
             <header className="about-reference-header">
-              <span>FIELD NOTE 01 / 2026</span>
               <h2>About me</h2>
-              <p>Strategy, data, research, and the work of figuring things out.</p>
               <span className="about-reference-rule">------</span>
             </header>
 
@@ -182,18 +203,9 @@ export default function Home() {
 
             <div className="about-reference-footer">
               <span>ESHA MITTAL / SAN FRANCISCO</span>
-              <span>SCROLL TO READ</span>
             </div>
           </article>
         </div>
-
-        <button
-          type="button"
-          className="section-next-button"
-          onClick={() => scrollToSection("play")}
-        >
-          Play <span aria-hidden="true">&rarr;</span>
-        </button>
       </section>
 
 
