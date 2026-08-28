@@ -6587,3 +6587,140 @@ a,
   font-family: var(--site-mono);
 }
 
+/* =========================
+   PLAY LANDING THEME
+========================= */
+
+.play-section {
+  min-height: 100vh;
+  padding: 48px clamp(24px, 7vw, 110px) 72px;
+  background: #ffffff;
+  color: var(--site-ink);
+  font-family: var(--site-mono);
+}
+
+.play-top {
+  max-width: 760px;
+  margin: 0;
+  padding-top: 0;
+}
+
+.play-top h2 {
+  margin: 18px 0 0;
+  color: var(--site-ink);
+  font-family: var(--site-mono);
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.play-project-list {
+  max-width: 900px;
+  margin-top: 58px;
+  border-top: 1px solid var(--site-rule);
+}
+
+.play-project-item {
+  padding: 22px 0 24px;
+  border-bottom: 1px solid var(--site-rule);
+  background: transparent;
+  color: var(--site-ink);
+  text-decoration: none;
+}
+
+.play-project-heading {
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.play-project-number {
+  color: var(--site-blue);
+  font-size: 10px;
+  letter-spacing: 0.4px;
+}
+
+.play-project-heading h3 {
+  margin: 0;
+  color: var(--site-ink);
+  font-family: var(--site-mono);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.play-project-item p {
+  max-width: 700px;
+  margin: 10px 0 0 58px;
+  color: var(--site-muted);
+  font-family: var(--site-mono);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.play-project-item:hover .play-project-heading h3 {
+  color: var(--site-blue);
+}
+
+.recently-published {
+  max-width: 900px;
+  margin-top: 58px;
+  padding: 0 0 12px;
+  border-bottom: 1px solid var(--site-rule);
+  color: var(--site-blue);
+  font-family: var(--site-mono);
+  font-size: 10px;
+  letter-spacing: 0.7px;
+}
+
+.mini-project-row {
+  max-width: 900px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--site-rule);
+  background: transparent;
+  color: var(--site-ink);
+}
+
+.mini-project-title {
+  color: var(--site-ink);
+  font-family: var(--site-mono);
+  font-size: 13px;
+}
+
+.company-yc {
+  color: var(--site-blue);
+  font-family: var(--site-mono);
+  font-size: 9px;
+}
+
+.mini-project-arrow {
+  color: var(--site-blue);
+}
+
+.play-section > .section-next-button {
+  position: static;
+  display: block;
+  margin: 58px 0 0;
+}
+
+@media (max-width: 600px) {
+  .play-section {
+    padding: 42px 22px 64px;
+  }
+
+  .play-project-list,
+  .recently-published,
+  .mini-project-row {
+    margin-top: 40px;
+  }
+
+  .play-project-item p {
+    margin-left: 0;
+  }
+
+  .play-project-heading {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 10px;
+  }
+}
+
