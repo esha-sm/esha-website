@@ -27,7 +27,7 @@ export default function Home() {
 
   const [showArticleReader, setShowArticleReader] =
     useState(false);
-  const [isBookOpen, setIsBookOpen] = useState(true);
+  const [isBookOpen, setIsBookOpen] = useState(false);
 
   const scrollToHome = () => {
     scrollToSection("home");
@@ -50,8 +50,10 @@ export default function Home() {
           className="book-toggle"
           onClick={() => setIsBookOpen((open) => !open)}
           aria-expanded={isBookOpen}
+          aria-label={isBookOpen ? "Close book" : "Open book"}
         >
-          {isBookOpen ? "Close book" : "Open book"}
+          <span>{isBookOpen ? "CLOSE" : "OPEN"}</span>
+          <strong aria-hidden="true">↕</strong>
         </button>
 
         <div className={`open-book ${isBookOpen ? "is-open" : "is-closed"}`} aria-label="Portfolio index">
