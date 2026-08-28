@@ -6637,3 +6637,150 @@ a,
     font-size: 8px;
   }
 }
+
+/* =========================
+   ABOUT SIDEBAR READABILITY
+========================= */
+
+.about-section {
+  min-height: 100vh;
+  padding: 0;
+  background: #ffffff;
+}
+
+.about-reference-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  width: min(1180px, 100%);
+  min-height: 100vh;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.about-reference-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 56px;
+  height: auto;
+  padding: 48px 34px 42px 28px;
+  border-right: 1px solid #dce3ee;
+  border-bottom: 0;
+}
+
+.about-site-label {
+  font-size: 14px;
+}
+
+.about-sidebar-group {
+  display: grid;
+  gap: 16px;
+}
+
+.about-sidebar-group > span {
+  margin-bottom: 8px;
+  font-size: 11px;
+}
+
+.about-sidebar-group a {
+  padding-left: 12px;
+  font-size: 12px;
+}
+
+.about-index-back {
+  width: fit-content;
+  margin-top: auto;
+}
+
+.about-reference-article {
+  height: auto;
+  min-width: 0;
+  overflow: visible;
+  padding: 48px clamp(38px, 8vw, 110px) 60px;
+}
+
+.about-reference-header {
+  max-width: 760px;
+  margin: 82px 0 46px;
+  text-align: left;
+}
+
+.about-reference-header > span,
+.about-reference-header p {
+  font-size: 10px;
+}
+
+.about-reference-header h2 {
+  margin: 18px 0 10px;
+  font-size: 42px;
+}
+
+.about-reference-article .about-copy {
+  max-width: 760px;
+  margin: 0;
+  column-count: 1 !important;
+  column-width: auto !important;
+}
+
+.about-reference-article .about-copy p {
+  max-width: 720px;
+  margin: 18px 0 0;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.about-reference-article .about-copy h3 {
+  break-before: auto;
+  margin: 36px 0 0;
+  font-size: 17px;
+}
+
+.about-reference-footer {
+  max-width: 760px;
+  margin: 48px 0 0;
+  font-size: 9px;
+}
+
+@media (max-width: 760px) {
+  .about-reference-layout {
+    display: block;
+    min-height: 100vh;
+  }
+
+  .about-reference-sidebar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    padding: 0 22px;
+    border-right: 0;
+    border-bottom: 1px solid #dce3ee;
+  }
+
+  .about-sidebar-group {
+    display: none;
+  }
+
+  .about-index-back {
+    margin: 0 0 0 auto;
+  }
+
+  .about-reference-article {
+    padding: 36px 22px 48px;
+  }
+
+  .about-reference-header {
+    margin: 48px 0 34px;
+  }
+
+  .about-reference-header h2 {
+    font-size: 34px;
+  }
+
+  .about-reference-article .about-copy p {
+    font-size: 13px;
+  }
+}
