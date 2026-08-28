@@ -5488,3 +5488,40 @@ a,
     background-image: linear-gradient(var(--rule) 1px, transparent 1px);
   }
 }
+
+/* Keep About as a plain page while the remaining sections are refined. */
+.about-section {
+  background: #ffffff;
+  color: #1c2e52;
+  font-family: "Space Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+.about-section::after {
+  display: none;
+}
+
+.about-reference-layout,
+.about-reference-article,
+.about-reference-sidebar,
+.about-copy,
+.about-reference-header,
+.about-reference-footer,
+.about-reference-breadcrumb,
+.about-site-label,
+.about-sidebar-group,
+.about-sidebar-group a,
+.about-reference-header h2,
+.about-reference-header p,
+.about-reference-article .about-copy h3,
+.about-reference-article .about-copy p {
+  font-family: "Space Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+.about-reference-sidebar {
+  border-right-color: #dce3ee;
+}
+
+.about-reference-article .about-copy p,
+.about-reference-header p {
+  color: #52617a;
+}
