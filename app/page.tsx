@@ -44,28 +44,47 @@ export default function Home() {
   return (
     <>
       <main id="home" className="home">
-        <div className="section-line-page">
-          <header className="section-line-header">
-            <span>ESHA MITTAL</span>
-            <span>PORTFOLIO / 2026</span>
-          </header>
+        <div className="open-book" aria-label="Portfolio index">
+          <section className="book-page book-page--index">
+            <div className="book-page-topline">
+              <span>ESHA MITTAL</span>
+              <span>01</span>
+            </div>
 
-          <div className="section-line-intro">
-            <h1>Hi, I&apos;m Esha.</h1>
-            <p>Strategy, data, research, and the work of figuring things out.</p>
-          </div>
+            <div className="book-page-heading">
+              <span>CONTENTS</span>
+              <h1>INDEX</h1>
+            </div>
 
-          <nav className="section-line-nav" aria-label="Portfolio sections">
-            <a href="#about"><span className="section-line-dot" /><strong>About</strong><em>01</em></a>
-            <a href="#play"><span className="section-line-dot" /><strong>Play</strong><em>02</em></a>
-            <a href="#writings"><span className="section-line-dot" /><strong>Writings</strong><em>03</em></a>
-            <a href="#contact"><span className="section-line-dot" /><strong>Contact</strong><em>04</em></a>
-          </nav>
+            <nav className="book-index-list" aria-label="Portfolio sections">
+              <a href="#about"><span>01</span><strong>About</strong><i>→</i></a>
+              <a href="#play"><span>02</span><strong>Play</strong><i>→</i></a>
+              <a href="#writings"><span>03</span><strong>Writings</strong><i>→</i></a>
+              <a href="#contact"><span>04</span><strong>Contact</strong><i>→</i></a>
+            </nav>
 
-          <footer className="section-line-footer">
-            <span>San Francisco, CA</span>
-            <span>UPDATED AUG 2026</span>
-          </footer>
+            <div className="book-page-footer">
+              <span>PORTFOLIO / 2026</span>
+              <span>ESHA MITTAL</span>
+            </div>
+          </section>
+
+          <section className="book-page book-page--title">
+            <div className="book-page-topline">
+              <span>FIELD NOTES</span>
+              <span>02</span>
+            </div>
+
+            <div className="book-title-content">
+              <h2>Hi, I&apos;m Esha.</h2>
+              <p>Strategy, data, research, and the work of figuring things out.</p>
+            </div>
+
+            <div className="book-page-footer">
+              <span>San Francisco, CA</span>
+              <span>UPDATED AUG 2026</span>
+            </div>
+          </section>
         </div>
 
       </main>

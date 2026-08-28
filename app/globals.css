@@ -5369,6 +5369,161 @@ a,
 }
 
 /* =========================
+   OPEN BOOK LANDING PAGE
+========================= */
+
+.home {
+  min-height: 100vh;
+  padding: 34px 5vw;
+  background: #f4f5f7;
+}
+
+.open-book {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: min(1080px, 100%);
+  min-height: min(650px, calc(100vh - 68px));
+  margin: auto;
+  background: #ffffff;
+  box-shadow: 0 5px 22px rgba(28, 46, 82, 0.08);
+}
+
+.book-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 42px clamp(26px, 5vw, 66px) 34px;
+  background: #ffffff;
+}
+
+.book-page--index {
+  border-right: 1px solid #dce3ee;
+}
+
+.book-page-topline,
+.book-page-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  color: var(--site-blue);
+  font-family: var(--site-mono);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+
+.book-page-heading {
+  margin: auto 0 62px;
+}
+
+.book-page-heading > span {
+  color: var(--site-blue);
+  font-family: var(--site-mono);
+  font-size: 10px;
+  letter-spacing: 0.6px;
+}
+
+.book-page-heading h1 {
+  margin: 20px 0 0;
+  color: var(--site-ink);
+  font-family: var(--site-mono);
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.book-index-list {
+  display: grid;
+  gap: 0;
+}
+
+.book-index-list a {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) 16px;
+  gap: 12px;
+  align-items: baseline;
+  padding: 15px 0;
+  border-top: 1px dotted #b9c5d9;
+  color: var(--site-ink);
+  font-family: var(--site-mono);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.book-index-list a:last-child {
+  border-bottom: 1px dotted #b9c5d9;
+}
+
+.book-index-list a > span,
+.book-index-list a > i {
+  color: var(--site-blue);
+  font-size: 10px;
+  font-style: normal;
+}
+
+.book-index-list a:hover strong {
+  color: var(--site-blue);
+}
+
+.book-page-footer {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid #dce3ee;
+}
+
+.book-title-content {
+  margin: auto 0;
+  padding: 0 5%;
+}
+
+.book-title-content h2 {
+  margin: 0;
+  color: var(--site-ink);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 500;
+  line-height: 0.95;
+}
+
+.book-title-content p {
+  max-width: 270px;
+  margin: 22px 0 0;
+  color: var(--site-muted);
+  font-family: var(--site-mono);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+@media (max-width: 650px) {
+  .home {
+    padding: 14px;
+  }
+
+  .open-book {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .book-page {
+    min-height: 470px;
+    padding: 30px 24px 26px;
+  }
+
+  .book-page--index {
+    border-right: 0;
+    border-bottom: 1px solid #dce3ee;
+  }
+
+  .book-page-heading {
+    margin: 92px 0 44px;
+  }
+
+  .book-title-content {
+    padding: 80px 0;
+  }
+}
+
+/* =========================
    MINIMAL WHITEBOARD FINISH
 ========================= */
 
