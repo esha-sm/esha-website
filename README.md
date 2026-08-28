@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Esha Mittal
+
+Personal portfolio for Esha Mittal, featuring work in strategy, data, venture, neuroscience research, and AI/ML.
+
+**Live site:** [eshamittal.com](https://eshamittal.com)
 
 ## Getting Started
 
@@ -14,7 +18,7 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit the live portfolio at [eshamittal.com](https://eshamittal.com).
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
