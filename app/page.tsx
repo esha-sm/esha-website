@@ -44,37 +44,44 @@ export default function Home() {
   return (
     <>
       <main id="home" className="home">
-        <div className="plain-index">
-          <header className="plain-index-header">
+        <div className="whiteboard">
+          <div className="whiteboard-heading">
             <span>ESHA MITTAL</span>
             <span>PORTFOLIO / 2026</span>
-          </header>
-
-          <div className="plain-index-intro">
-            <h1>Hi, I&apos;m Esha.</h1>
-            <p>Strategy, data, research, and the work of figuring things out.</p>
           </div>
 
-          <nav className="plain-index-grid" aria-label="Portfolio sections">
-            <div className="plain-index-group">
-              <h2>01. ABOUT</h2>
-              <a href="#about">About me <span>→</span></a>
-              <a href="#contact">Contact <span>→</span></a>
-            </div>
-            <div className="plain-index-group">
-              <h2>02. WORK</h2>
-              <a href="#play">Projects &amp; experiments <span>→</span></a>
-            </div>
-            <div className="plain-index-group">
-              <h2>03. NOTES</h2>
-              <a href="#writings">Writings <span>→</span></a>
-            </div>
+          <div className="whiteboard-welcome">
+            <h1>Hi, I&apos;m Esha.</h1>
+            <p>Welcome to my little space. Have fun!</p>
+          </div>
+
+          <nav className="sticky-note-board" aria-label="Portfolio sections">
+            <a className="sticky-note sticky-note--about" href="#about">
+              <span>01</span>
+              <strong>About</strong>
+              <em>get to know me</em>
+            </a>
+            <a className="sticky-note sticky-note--play" href="#play">
+              <span>02</span>
+              <strong>Play</strong>
+              <em>work &amp; experiments</em>
+            </a>
+            <a className="sticky-note sticky-note--writings" href="#writings">
+              <span>03</span>
+              <strong>Writings</strong>
+              <em>notes from the rabbit holes</em>
+            </a>
+            <a className="sticky-note sticky-note--contact" href="#contact">
+              <span>04</span>
+              <strong>Contact</strong>
+              <em>say hello</em>
+            </a>
           </nav>
 
-          <footer className="plain-index-footer">
+          <div className="whiteboard-footer">
             <span>San Francisco, CA</span>
             <span>UPDATED AUG 2026</span>
-          </footer>
+          </div>
         </div>
 
       </main>
