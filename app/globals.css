@@ -6250,3 +6250,105 @@ a,
 .about-reference-header p {
   color: #52617a;
 }
+
+/* =========================
+   BOOK STATE AND COMPACT ABOUT
+========================= */
+
+.home {
+  position: relative;
+}
+
+.book-toggle {
+  position: absolute;
+  top: 28px;
+  right: 5vw;
+  z-index: 3;
+  border: 0;
+  border-bottom: 1px solid var(--site-blue);
+  padding: 0 0 2px;
+  background: transparent;
+  color: var(--site-blue);
+  cursor: pointer;
+  font-family: var(--site-mono);
+  font-size: 10px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.book-toggle:hover {
+  color: var(--site-blue-deep);
+  border-color: var(--site-blue-deep);
+}
+
+.open-book.is-closed {
+  display: block;
+  width: min(540px, 100%);
+}
+
+.open-book.is-closed .book-page--index {
+  display: none;
+}
+
+.open-book.is-closed .book-page--title {
+  min-height: min(650px, calc(100vh - 68px));
+  border-right: 0;
+}
+
+.about-reference-layout {
+  min-height: 100vh;
+}
+
+.about-reference-header {
+  margin-top: 54px;
+  margin-bottom: 28px;
+}
+
+.about-reference-header h2 {
+  margin: 14px 0 8px;
+  font-size: 32px;
+}
+
+.about-reference-header p {
+  font-size: 11px;
+}
+
+.about-reference-rule {
+  margin-top: 14px;
+}
+
+.about-reference-article .about-copy p {
+  margin-top: 10px;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.about-reference-article .about-copy h3 {
+  margin-top: 22px;
+  font-size: 13px;
+}
+
+.about-reference-footer {
+  margin-top: 24px;
+  padding-top: 10px;
+  font-size: 8px;
+}
+
+@media (max-width: 760px) {
+  .book-toggle {
+    top: 18px;
+    right: 22px;
+  }
+
+  .open-book.is-closed .book-page--title {
+    min-height: calc(100vh - 28px);
+  }
+
+  .about-reference-header {
+    margin-top: 40px;
+  }
+
+  .about-reference-article .about-copy p {
+    font-size: 11px;
+  }
+}
