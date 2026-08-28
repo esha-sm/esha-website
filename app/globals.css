@@ -6300,8 +6300,8 @@ a,
 }
 
 .about-reference-header {
-  margin-top: 54px;
-  margin-bottom: 28px;
+  margin: 28px 0 24px;
+  text-align: left;
 }
 
 .about-reference-header h2 {
@@ -6324,6 +6324,7 @@ a,
 }
 
 .about-reference-article .about-copy h3 {
+  break-before: auto;
   margin-top: 22px;
   font-size: 13px;
 }
@@ -6350,5 +6351,122 @@ a,
 
   .about-reference-article .about-copy p {
     font-size: 11px;
+  }
+}
+
+/* =========================
+   A5 ABOUT PAGE
+========================= */
+
+.about-section {
+  min-height: 100vh;
+  padding: 0;
+  background: #f3f4f6;
+}
+
+.about-reference-layout {
+  display: block;
+  width: min(148mm, calc(100vw - 28px));
+  height: min(210mm, calc(100vh - 28px));
+  min-height: 0;
+  margin: 14px auto;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 5px 18px rgba(28, 46, 82, 0.08);
+}
+
+.about-reference-sidebar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 42px;
+  padding: 0 22px;
+  border-right: 0;
+  border-bottom: 1px solid #dce3ee;
+}
+
+.about-sidebar-group {
+  display: none;
+}
+
+.about-index-back {
+  margin: 0;
+}
+
+.about-reference-article {
+  height: calc(100% - 42px);
+  overflow: hidden;
+  padding: 24px 28px 22px;
+}
+
+.about-reference-breadcrumb {
+  font-size: 8px;
+}
+
+.about-reference-header {
+  margin: 28px 0 22px;
+}
+
+.about-reference-header > span,
+.about-reference-header p {
+  font-size: 8px;
+}
+
+.about-reference-header h2 {
+  margin: 10px 0 6px;
+  font-size: 25px;
+}
+
+.about-reference-rule {
+  margin-top: 10px;
+}
+
+.about-reference-article .about-copy {
+  max-width: none;
+  column-count: 1 !important;
+  column-width: auto !important;
+}
+
+.about-reference-article .about-copy p {
+  max-width: none;
+  margin: 8px 0 0;
+  font-size: 8px;
+  line-height: 1.42;
+}
+
+.about-reference-article .about-copy h3 {
+  margin: 15px 0 0;
+  font-size: 10px;
+}
+
+.about-reference-footer {
+  margin-top: 18px;
+  padding-top: 8px;
+  font-size: 7px;
+}
+
+@media (max-width: 600px) {
+  .about-reference-layout {
+    width: calc(100vw - 20px);
+    height: calc(100vh - 20px);
+    margin: 10px auto;
+  }
+
+  .about-reference-sidebar {
+    padding: 0 16px;
+  }
+
+  .about-reference-article {
+    padding: 20px 18px;
+  }
+
+  .about-reference-header {
+    margin: 24px 0 20px;
+  }
+
+  .about-reference-article .about-copy p {
+    font-size: 8px;
   }
 }
