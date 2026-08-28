@@ -88,24 +88,41 @@ export default function Home() {
         id="about"
         className="about-section"
       >
-        <div className="section-ipod-nav section-ipod-nav--inside" aria-label="Home navigation">
-          <button
-            type="button"
-            className="section-home-button"
-            onClick={scrollToHome}
-            aria-label="Return to the iPod home"
-          >
-            <span aria-hidden="true">&larr;</span> back to index
-          </button>
-        </div>
+        <div className="about-reference-layout">
+          <aside className="about-reference-sidebar">
+            <a className="about-site-label" href="#home">ESHA MITTAL</a>
+            <div className="about-sidebar-group">
+              <span>01. ABOUT</span>
+              <a className="is-active" href="#about">About me</a>
+              <a href="#play">Work &amp; experiments</a>
+              <a href="#writings">Writings</a>
+              <a href="#contact">Contact</a>
+            </div>
+            <button
+              type="button"
+              className="section-home-button about-index-back"
+              onClick={scrollToHome}
+              aria-label="Return to the index"
+            >
+              &larr; back to index
+            </button>
+          </aside>
 
-        <div className="about-number">
-          01 / ABOUT
-        </div>
+          <article className="about-reference-article">
+            <div className="about-reference-breadcrumb">
+              <span>ABOUT</span>
+              <span>/</span>
+              <strong>WHO IS ESHA?</strong>
+            </div>
 
-        <div className="about-content">
-          <div className="about-copy">
-            <h2>A little about me</h2>
+            <header className="about-reference-header">
+              <span>FIELD NOTE 01 / 2026</span>
+              <h2>About me</h2>
+              <p>Strategy, data, research, and the work of figuring things out.</p>
+              <span className="about-reference-rule">------</span>
+            </header>
+
+            <div className="about-copy">
 
             <p>
               I recently graduated from Arizona State University. Most recently, I worked on expansion strategy at <a href="https://www.wearewarp.com/" target="_blank" rel="noreferrer" className="about-highlight">Warp</a>.
@@ -140,7 +157,13 @@ export default function Home() {
             <p>
               So, basically, I spend my time either overthinking something or coloring it in.
             </p>
-          </div>
+            </div>
+
+            <div className="about-reference-footer">
+              <span>ESHA MITTAL / SAN FRANCISCO</span>
+              <span>SCROLL TO READ</span>
+            </div>
+          </article>
         </div>
 
         <button
