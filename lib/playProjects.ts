@@ -1,4 +1,32 @@
-export const playProjects = [
+type PlayProject = {
+  slug: string;
+  title?: string;
+  companyLabel?: string;
+  logo?: string;
+  yc?: string;
+  type?: string;
+  summary: string;
+  description: string;
+  tags: string[];
+  timeline: string;
+  role: string;
+  url: string;
+  detailSections?: { heading: string; body: string[] }[];
+  detailCard?: {
+    logo?: string;
+    files?: string[];
+    labeledFiles?: string[];
+    meta?: {
+      type: string;
+      domain: string;
+      task: string;
+      date: string;
+      tools: string;
+    };
+  };
+};
+
+export const playProjects: PlayProject[] = [
   {
     slug: "reddit-insights-engine",
     title: "Reddit Insights Engine",
@@ -42,9 +70,9 @@ export const playProjects = [
     yc: "W19",
     type: "Product",
     summary:
-      "Dyneti builds AI-powered technology that helps businesses detect fraudulent payment cards and prevent checkout fraud.",
+      "AI card scanning for checkout and fraud prevention.",
     description:
-      "Dyneti builds AI-powered technology that helps businesses detect fraudulent payment cards and prevent checkout fraud.",
+      "Dyneti is an AI card scanning company for checkout and fraud prevention.",
     tags: ["Product", "Go-to-Market", "Research", "Strategy"],
     timeline: "2024",
     role: "Product thinking",
@@ -113,7 +141,7 @@ export const playProjects = [
     yc: "S24",
     type: "AI Product",
     summary:
-      "Designed a workflow to turn scattered customer context into sharper recommendations and next-step actions.",
+      "AI insurance platform for technology companies.",
     description:
       "Created a take-home that framed customer context, weak signals, and team workflows into a more usable internal product: surfacing what matters, summarizing the account story, and recommending actions that frontline teams can act on quickly.",
     tags: ["AI", "Product", "Workflow", "Customer Insights"],
@@ -193,3 +221,20 @@ export const playProjects = [
     url: "#",
   },
 ];
+
+export function takeHomeProjects() {
+  return playProjects.filter((project) => project.slug.includes("take-home"));
+}
+
+export function getPlayProject(slug: string) {
+  return playProjects.find((project) => project.slug === slug);
+}
+
+export function adjacentTakeHomes(slug: string) {
+  const samples = takeHomeProjects();
+  const index = samples.findIndex((project) => project.slug === slug);
+  return {
+    prev: index > 0 ? samples[index - 1] : null,
+    next: index >= 0 && index < samples.length - 1 ? samples[index + 1] : null,
+  };
+}

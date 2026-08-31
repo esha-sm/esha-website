@@ -1,87 +1,94 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { playProjects } from "@/lib/playProjects";
+import { PlayArticleHeader } from "@/app/components/PlayArticleHeader";
+import { adjacentTakeHomes, getPlayProject } from "@/lib/playProjects";
 
 export default function CorgiTakeHome() {
-  const [expanded, setExpanded] = useState(false);
-  const project = playProjects.find((item) => item.slug === "corgi-take-home");
-
-  const handleBackHome = () => {
-    window.location.href = "/#play";
-  };
-
+  const project = getPlayProject("corgi-take-home");
   if (!project) return null;
 
+  const { prev, next } = adjacentTakeHomes(project.slug);
+
   return (
-    <div className="case-backdrop">
-      <div className={`case-modal ${expanded ? "case-modal-expanded" : ""}`}>
-        <div className="case-topbar">
-          <button type="button" className="case-icon-btn" aria-label="Back home" onClick={handleBackHome}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M3 11.5 12 4l9 7.5M5.5 10.5V20h13v-9.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-          <button type="button" className="case-icon-btn" aria-label="Expand" onClick={() => setExpanded((value) => !value)}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path d="M9 3H3v6M15 3h6v6M9 21H3v-6M15 21h6v-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
+    <>
+      <PlayArticleHeader
+        slug={project.slug}
+        title="Corgi Work Sample"
+        crumb="CORGI"
+        logo="/corgi/corgi-logo.jpeg?v=2"
+        kicker=""
+        deck="Corgi is an AI insurance platform for technology companies."
+        compact
+      />
+
+      <section className="play-article-block">
+        <span className="play-article-kicker">The problem</span>
+        <p>
+          For their Strategy & Research take-home, I was asked to design a
+          cyber insurance policy for a small-to-mid-sized business. The
+          challenge was to create something that felt like a real policy
+          while making practical decisions about coverage, limits, exclusions,
+          and risk. They were looking for:
+        </p>
+        <ul className="play-article-list">
+          <li>Clarity, is the policy easy to understand?</li>
+          <li>Judgment, does the policy include the right details?</li>
+          <li>Practicality, could a real company use this policy?</li>
+          <li>
+            Resourcefulness, does the policy use outside material intelligently?
+          </li>
+        </ul>
+      </section>
+
+      <section className="play-article-block">
+        <span className="play-article-kicker">What I did</span>
+        <p>
+          I researched existing cyber insurance policies and regulatory
+          frameworks, then drafted a complete policy from the ground up. I
+          defined the coverage, limits, exclusions, and conditions, and created
+          a declarations page and sample insurance application. I also wrote a
+          decision rationale explaining the reasoning and trade-offs behind the
+          key choices I made.
+        </p>
+      </section>
+
+      <section className="play-article-block">
+        <span className="play-article-kicker">The work sample</span>
+      </section>
+
+      <section className="play-article-sample">
+        <div className="play-article-sample-heading">
+          <span>01</span>
+          <strong>Cyber insurance policy</strong>
         </div>
-
-        <div className="case-hero">
-          <div className="case-hero-left">
-            <div className="case-brand">
-              <div className="case-logo">
-                {project.logo ? (
-                  <img src={project.logo} alt="" width={40} height={40} />
-                ) : (
-                  <Image src="/corgi/corgi-logo.jpeg" alt="" width={40} height={40} />
-                )}
-              </div>
-              <h1 className="case-title">{project.companyLabel ?? project.title}</h1>
-            </div>
-
-            <p className="case-desc">{project.description}</p>
-
-            <div className="case-meta-grid">
-              <div className="case-meta-item"><span>Timeline</span><p>{project.timeline}</p></div>
-              <div className="case-meta-item"><span>Role</span><p>{project.role}</p></div>
-              <div className="case-meta-item"><span>Type</span><p>{project.type ?? "Take-home Assignment"}</p></div>
-              <div className="case-meta-item"><span>Summary</span><p>{project.summary}</p></div>
-            </div>
-          </div>
-
-          <div className="case-hero-right corgi-policy-preview">
-            <iframe src="/corgi/Insurance-policy.pdf#page=1&view=FitH" title="Cyber insurance policy preview" />
-          </div>
+        <p>
+          You can view the cyber insurance policy{" "}
+          <a href="/corgi/Insurance-policy.pdf" target="_blank" rel="noreferrer">
+            here
+          </a>
+          .
+        </p>
+        <div className="play-article-figure play-article-figure--frame">
+          <iframe
+            src="/corgi/Insurance-policy.pdf#page=1&view=FitH"
+            title="Cyber insurance policy"
+          />
         </div>
+      </section>
 
-        <div className="case-divider" />
-
-        {project.detailSections?.map((section) => (
-          <div key={section.heading} className="case-section">
-            <span className="case-kicker">{section.heading}</span>
-            <h2 className="case-statement">{section.body[0]}</h2>
-            {section.body.slice(1).map((paragraph) => (
-              <p key={paragraph} className="case-body">
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        ))}
-
-        <div className="case-footer">
-          <Link href="/play/dyneti-take-home" className="case-footer-link">
-            ← Previous — Dyneti
+      <nav className="play-article-pager">
+        {prev ? (
+          <Link href={`/play/${prev.slug}`}>
+            ← {prev.companyLabel || prev.title}
           </Link>
-          <Link href="/play/dataoric-take-home" className="case-footer-link">
-            Next — Datoric →
+        ) : (
+          <span />
+        )}
+        {next ? (
+          <Link href={`/play/${next.slug}`}>
+            {next.companyLabel || next.title} →
           </Link>
-        </div>
-      </div>
-    </div>
+        ) : null}
+      </nav>
+    </>
   );
 }

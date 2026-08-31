@@ -1,97 +1,92 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { SectionLayout } from "./components/SectionLayout";
+import { AboutIntro } from "./components/AboutIntro";
+import { AboutStickyNote } from "./components/AboutStickyNote";
+import { PageScroll } from "./components/PageScroll";
+import { playProjects } from "../lib/playProjects";
 
 export default function Home() {
-  // playProjects moved to /lib/playProjects.ts
-  // keep a local fallback if import fails
-  let playProjectsLocal = [] as any[];
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const mod = require("../lib/playProjects");
-    playProjectsLocal = mod.playProjects || [];
-  } catch (e) {
-    playProjectsLocal = [];
-  }
-
-  const substackUrl =
-    "https://substack.com/home/post/p-206762963";
-
-  const featuredProjects = playProjectsLocal.filter(
+  const substackUrl = "https://substack.com/home/post/p-206762963";
+  const featuredProjects = playProjects.filter(
     (project) => !project.slug.includes("take-home")
   );
-
-  const takeHomeProjects = playProjectsLocal.filter(
-    (project) => project.slug.includes("take-home")
+  const takeHomeProjects = playProjects.filter((project) =>
+    project.slug.includes("take-home")
   );
 
   const [showArticleReader, setShowArticleReader] =
     useState(false);
   const [isBookOpen, setIsBookOpen] = useState(false);
+  const bookAudioCtxRef = useRef<AudioContext | null>(null);
+  const bookSoundBufferRef = useRef<AudioBuffer | null>(null);
+  const bookFallbackRef = useRef<HTMLAudioElement | null>(null);
 
-  const scrollToHome = () => {
-    scrollToSection("home");
-  };
+  useEffect(() => {
+    const AudioContextCtor =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext?: typeof AudioContext })
+        .webkitAudioContext;
+    if (!AudioContextCtor) return;
+
+    const ctx = new AudioContextCtor();
+    bookAudioCtxRef.current = ctx;
+
+    fetch("/sounds/mixkit-pen-click-and-release-1115.wav")
+      .then((response) => response.arrayBuffer())
+      .then((data) => ctx.decodeAudioData(data))
+      .then((buffer) => {
+        bookSoundBufferRef.current = buffer;
+      })
+      .catch(() => {});
+
+    return () => {
+      void ctx.close();
+    };
+  }, []);
 
   const playBookSound = () => {
-    const AudioContextConstructor =
-      window.AudioContext ||
-      (window as typeof window & { webkitAudioContext?: typeof AudioContext })
-        .webkitAudioContext;
+    const ctx = bookAudioCtxRef.current;
+    const buffer = bookSoundBufferRef.current;
 
-    if (!AudioContextConstructor) return;
+    if (ctx && buffer) {
+      const start = () => {
+        const source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.connect(ctx.destination);
+        source.start(0);
+      };
 
-    const audioContext = new AudioContextConstructor();
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
+      if (ctx.state === "suspended") {
+        void ctx.resume().then(start);
+      } else {
+        start();
+      }
+      return;
+    }
 
-    oscillator.type = "sine";
-    oscillator.frequency.setValueAtTime(420, audioContext.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(
-      760,
-      audioContext.currentTime + 0.08
-    );
-    gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.045, audioContext.currentTime + 0.01);
-    gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.14);
-
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime + 0.14);
-  };
-
-  const scrollToSection = (sectionId: string) => {
-    document
-      .getElementById(sectionId)
-      ?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+    const fallback = bookFallbackRef.current;
+    if (!fallback) return;
+    fallback.currentTime = 0;
+    void fallback.play();
   };
 
   return (
     <>
+      <PageScroll />
       <main id="home" className="home">
-        <button
-          type="button"
-          className="book-toggle"
-          onClick={() => {
-            playBookSound();
-            setIsBookOpen((open) => !open);
-          }}
-          aria-expanded={isBookOpen}
-          aria-label={isBookOpen ? "Close book" : "Open book"}
-        >
-          <span>{isBookOpen ? "CLOSE" : "OPEN"}</span>
-          <strong aria-hidden="true">↕</strong>
-        </button>
-
-        <div className={`open-book ${isBookOpen ? "is-open" : "is-closed"}`} aria-label="Portfolio index">
+        <audio
+          ref={bookFallbackRef}
+          src="/sounds/mixkit-pen-click-and-release-1115.wav"
+          preload="auto"
+          hidden
+        />
+        <div className="book-stage">
+          <div className={`open-book ${isBookOpen ? "is-open" : "is-closed"}`} aria-label="Portfolio index">
           <section className="book-page book-page--title">
             <div className="book-page-topline">
-              <span>ESHA MITTAL</span>
-              <span>01</span>
+          
             </div>
 
             <div className="book-title-content">
@@ -107,8 +102,7 @@ export default function Home() {
 
           <section className="book-page book-page--index">
             <div className="book-page-topline">
-              <span>FIELD NOTES</span>
-              <span>02</span>
+            
             </div>
 
             <div className="book-page-heading">
@@ -119,14 +113,27 @@ export default function Home() {
               <a href="#about"><span>01</span><strong>About</strong><i>→</i></a>
               <a href="#play"><span>02</span><strong>Play</strong><i>→</i></a>
               <a href="#writings"><span>03</span><strong>Writings</strong><i>→</i></a>
-              <a href="#contact"><span>04</span><strong>Contact</strong><i>→</i></a>
             </nav>
 
             <div className="book-page-footer">
-              <span>ESHA MITTAL</span>
+              
               <span>UPDATED AUG 2026</span>
             </div>
           </section>
+        </div>
+          <button
+            type="button"
+            className="book-toggle"
+            onClick={() => {
+              playBookSound();
+              setIsBookOpen((open) => !open);
+            }}
+            aria-expanded={isBookOpen}
+            aria-label={isBookOpen ? "Flip book closed" : "Flip book open"}
+          >
+            <span>FLIP</span>
+            <strong aria-hidden="true">{isBookOpen ? "‹" : "›"}</strong>
+          </button>
         </div>
 
       </main>
@@ -140,30 +147,16 @@ export default function Home() {
         id="about"
         className="about-section"
       >
-        <div className="about-reference-layout">
-          <aside className="about-reference-sidebar">
-            <a className="about-site-label" href="#home">ESHA MITTAL</a>
-            <div className="about-sidebar-group">
-              <span>01. ABOUT</span>
-              <a className="is-active" href="#about">ABOUT ME</a>
-              <a href="#play">Play</a>
-              <a href="#writings">Writings</a>
-              <a href="#contact">Contact</a>
-            </div>
-          </aside>
+        <SectionLayout active="about">
 
           <article className="about-reference-article">
             <div className="about-reference-breadcrumb">
-              <span>ABOUT</span>
+              <span>CONTENTS</span>
               <span>/</span>
               <strong>ABOUT ME</strong>
             </div>
 
-            <header className="about-reference-header">
-              <h2>About me</h2>
-              <span className="about-reference-rule">------</span>
-            </header>
-
+            <AboutIntro>
             <div className="about-copy">
 
             <p>
@@ -171,15 +164,15 @@ export default function Home() {
             </p>
 
             <p>
-              Before that, I worked on automating data workflows at <a href="https://spx.com/" target="_blank" rel="noreferrer" className="about-highlight">SPX</a> and evaluated early-stage companies and investment opportunities at a VC firm, contributing to a $1.5M funding round.
+              Before that, I worked on automating data workflows at <a href="https://spx.com/" target="_blank" rel="noreferrer" className="about-highlight">SPX</a> and evaluated early-stage companies and investment opportunities at a VC firm, contributing to a $1.5M funding round for a biotech startup.
             </p>
 
             <p>
-              I also spent time doing neuroscience research, studying whether variations in a bitter taste receptor gene could be connected to late-onset Alzheimer&apos;s disease and schizophrenia, and received an <a href="https://sols.asu.edu/research/solur/symposium" target="_blank" rel="noreferrer" className="about-highlight">Honorable Mention</a> for the work at ASU&apos;s Undergraduate Research Poster Symposium.
+              I also spent time doing <a href="https://sols.asu.edu/" target="_blank" rel="noreferrer" className="about-highlight">neuroscience research</a> at Arizona State University, studying whether TAS2R38 gene variations were associated with late-onset Alzheimer&apos;s disease and schizophrenia. I received an <a href="https://sols.asu.edu/research/solur/symposium" target="_blank" rel="noreferrer" className="about-highlight">Honorable Mention Award</a> in Neuroscience at the 30th Annual Undergraduate Research Poster Symposium.
             </p>
 
             <p>
-              I&apos;m insanely fascinated by the brain.. how something so complex can produce memory, emotion, movement, and everything in between. I also have a pretty bad habit of not leaving unsolved problems alone; if something doesn&apos;t make sense to me, I keep digging until I figure it out.
+              I&apos;m insanely fascinated by the brain. I also have a pretty bad habit of not leaving unsolved problems alone; if something doesn&apos;t make sense to me, I keep digging until I figure it out.
             </p>
 
             <p>
@@ -195,17 +188,48 @@ export default function Home() {
             <p>
               I&apos;m also trained in Indian classical singing. And when I&apos;m not doing either of those, there&apos;s a good chance I&apos;m <span className="about-highlight">coloring</span>.
             </p>
-
-            <p>
-              So, basically, I spend my time either overthinking something or coloring it in.
-            </p>
             </div>
 
-            <div className="about-reference-footer">
-              <span>ESHA MITTAL / SAN FRANCISCO</span>
+            <div className="contact-content">
+              <p>
+                I&apos;m looking for what&apos;s next. If you want to talk about the brain, tech, or an interesting problem, write to me.
+              </p>
+              <div className="contact-links" aria-label="Contact links">
+                <a href="mailto:emittal@asu.edu">Email</a>
+                <a
+                  href="https://www.linkedin.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="https://substack.com/@eshamittall"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Substack
+                </a>
+                <a
+                  href="https://github.com/esha-sm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://x.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  X
+                </a>
+              </div>
             </div>
+            </AboutIntro>
           </article>
-        </div>
+        </SectionLayout>
+        <AboutStickyNote />
       </section>
 
 
@@ -217,122 +241,92 @@ export default function Home() {
         id="play"
         className="play-section"
       >
-        <div className="section-ipod-nav section-ipod-nav--inside" aria-label="Home navigation">
-          <button
-            type="button"
-            className="section-home-button"
-            onClick={scrollToHome}
-            aria-label="Return to the iPod home"
-          >
-            <span aria-hidden="true">&larr;</span> back to index
-          </button>
-        </div>
+        <SectionLayout active="play">
 
-        <div className="play-top">
-          <span className="section-number">02 / PLAY</span>
-
-          <h2>A collection of experiments, projects, work samples, and more.</h2>
-
-          <p className="play-subtitle">
-            
-          </p>
-      </div>
-
-        <div className="play-project-list">
-          {featuredProjects.map((project, index) => {
-            const linkedProject = project.url && project.url !== "#";
-            const projectContent = (
-              <>
-                <div className="play-project-heading">
-                  <span className="play-project-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-
-                  <h3>{project.title}</h3>
-                </div>
-
-                <p>{project.summary}</p>
-              </>
-            );
-
-            return linkedProject ? (
-              <a
-                key={project.slug}
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="play-project-item"
-              >
-                {projectContent}
-              </a>
-            ) : (
-              <div key={project.slug} className="play-project-item">
-                {projectContent}
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="recently-published">
-          <span>
-            WORK SAMPLES
-          </span>
-
-          <span>
-            ↓
-          </span>
-        </div>
-
-        {takeHomeProjects.map((project, idx) => (
-          <a
-            key={project.slug}
-            href={`/play/${project.slug}`}
-            className="mini-project-row"
-          >
-            <div className="mini-project-meta">
-              <span className="mini-project-number">
-                {String(idx + 1).padStart(2, "0")}
-              </span>
-
-              <div className="mini-project-copy">
-                <span className="mini-project-title">
-                  {project.logo && (
-                    <img
-                      src={project.logo}
-                      alt=""
-                      className="mini-project-logo"
-                    />
-                  )}
-
-                  <span>
-                    {project.companyLabel || project.title}
-                  </span>
-
-                  {project.yc && (
-                    <span className="company-yc">
-                      (YC {project.yc})
-                    </span>
-                  )}
-                </span>
-              </div>
+          <article className="about-reference-article">
+            <div className="about-reference-breadcrumb">
+              <span>CONTENTS</span>
+              <span>/</span>
+              <strong>PLAY</strong>
             </div>
 
-            <span
-              className="mini-project-arrow"
-              aria-label={`Open ${project.title}`}
-            >
-              ↗
-            </span>
-          </a>
-        ))}
+            <div className="recently-published">
+              <span>PROJECTS</span>
+              <span>↓</span>
+            </div>
 
-        <button
-          type="button"
-          className="section-next-button"
-          onClick={() => scrollToSection("writings")}
-        >
-          Writings <span aria-hidden="true">&rarr;</span>
-        </button>
+            <div className="play-project-list">
+              {featuredProjects.map((project, index) => {
+                const linkedProject = project.url && project.url !== "#";
+                const projectContent = (
+                  <>
+                    <div className="play-project-heading">
+                      <span className="play-project-number">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <h3>{project.title}</h3>
+                    </div>
+                    <p>{project.summary}</p>
+                  </>
+                );
+
+                return linkedProject ? (
+                  <a
+                    key={project.slug}
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="play-project-item"
+                  >
+                    {projectContent}
+                  </a>
+                ) : (
+                  <div key={project.slug} className="play-project-item">
+                    {projectContent}
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="recently-published">
+              <span>WORK SAMPLES</span>
+              <span>↓</span>
+            </div>
+
+            {takeHomeProjects.map((project, idx) => (
+              <a
+                key={project.slug}
+                href={`/play/${project.slug}`}
+                className="mini-project-row"
+              >
+                <div className="mini-project-meta">
+                  <span className="mini-project-number">
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <span className="mini-project-title">
+                    {project.logo && (
+                      <img
+                        src={project.logo}
+                        alt=""
+                        className="mini-project-logo"
+                      />
+                    )}
+                    <span>{project.companyLabel || project.title}</span>
+                    {project.yc && (
+                      <span className="company-yc">(YC {project.yc})</span>
+                    )}
+                  </span>
+                </div>
+                <span
+                  className="mini-project-arrow"
+                  aria-label={`Open ${project.companyLabel || project.title}`}
+                >
+                  ↗
+                </span>
+              </a>
+            ))}
+          </article>
+        </SectionLayout>
       </section>
 
 
@@ -344,36 +338,16 @@ export default function Home() {
         id="writings"
         className="writings-section"
       >
-        <div className="section-ipod-nav section-ipod-nav--inside" aria-label="Home navigation">
-          <button
-            type="button"
-            className="section-home-button"
-            onClick={scrollToHome}
-            aria-label="Return to the iPod home"
-          >
-            <span aria-hidden="true">&larr;</span> back to index
-          </button>
-        </div>
+        <SectionLayout active="writings">
 
+          <article className="about-reference-article">
+            <div className="about-reference-breadcrumb">
+              <span>CONTENTS</span>
+              <span>/</span>
+              <strong>WRITINGS</strong>
+            </div>
 
-        {/* WRITINGS INTRO */}
-
-        <div className="writings-top">
-
-          <span className="section-number">
-            03 / WRITINGS
-          </span>
-
-
-          
-          
-          
-        </div>
-
-
-        {/* RECENTLY PUBLISHED */}
-
-        <div className="recently-published">
+            <div className="recently-published">
 
           <span>
             RECENTLY PUBLISHED
@@ -502,111 +476,14 @@ export default function Home() {
 
           <div className="article-content">
             <h3>
-              more coming soon..
+              more soon.
             </h3>
           </div>
         </div>
-
-        <button
-          type="button"
-          className="section-next-button"
-          onClick={() => scrollToSection("contact")}
-        >
-          Contact <span aria-hidden="true">&rarr;</span>
-        </button>
-
+          </article>
+        </SectionLayout>
       </section>
 
-
-      {/* =========================
-          CONTACT
-      ========================= */}
-
-      <section
-        id="contact"
-        className="portfolio-section"
-      >
-        <div className="section-ipod-nav section-ipod-nav--inside" aria-label="Home navigation">
-          <button
-            type="button"
-            className="section-home-button"
-            onClick={scrollToHome}
-            aria-label="Return to the iPod home"
-          >
-            <span aria-hidden="true">&larr;</span> back to index
-          </button>
-        </div>
-
-        <div className="contact-content">
-          <span className="section-number">04 / CONTACT</span>
-
-          <h2>Let&apos;s chat!</h2>
-
-          <p>
-            I&apos;m currently looking for what&apos;s next. If you&apos;d like to talk about the brain, data, tech, startups, or an interesting problem, I&apos;d love to hear from you.
-          </p>
-
-          <div className="contact-links" aria-label="Contact links">
-            <a href="mailto:emittal@asu.edu" aria-label="Email Esha">
-              <span className="contact-link-mark">
-                <img src="https://cdn.simpleicons.org/gmail" alt="" />
-              </span>
-              <span>Email</span>
-            </a>
-
-            <a
-              href="https://www.linkedin.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-            >
-              <span className="contact-link-mark">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM3.56 20.45h3.56V9H3.56v11.45z" />
-                </svg>
-              </span>
-              <span>LinkedIn</span>
-            </a>
-
-            <a
-              href="https://substack.com/@eshamittall"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Substack"
-            >
-              <span className="contact-link-mark">
-                <img src="https://cdn.simpleicons.org/substack" alt="" />
-              </span>
-              <span>Substack</span>
-            </a>
-
-            <a
-              href="https://github.com/esha-sm"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-            >
-              <span className="contact-link-mark">
-                <img src="https://cdn.simpleicons.org/github" alt="" />
-              </span>
-              <span>GitHub</span>
-            </a>
-
-            <a
-              href="https://x.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="X"
-            >
-              <span className="contact-link-mark">
-                <img src="https://cdn.simpleicons.org/x" alt="" />
-              </span>
-              <span>X</span>
-            </a>
-          </div>
-        </div>
-
-      </section>
 
     </>
   );

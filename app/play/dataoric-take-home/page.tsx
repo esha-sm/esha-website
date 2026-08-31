@@ -1,87 +1,98 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
-import { playProjects } from "@/lib/playProjects";
+import { PlayArticleHeader } from "@/app/components/PlayArticleHeader";
+import { adjacentTakeHomes, getPlayProject } from "@/lib/playProjects";
+
+const introductions = [
+  {
+    name: "Dyneti",
+    logo: "/dyneti/dyneti-logo.png",
+    line: "AI card scanning",
+  },
+  {
+    name: "Supermemory",
+    logo: "/corgi/datoric/supermemory-logo.png",
+    line: "Memory for AI agents",
+  },
+];
 
 export default function DataoricTakeHome() {
-  const project = playProjects.find((item) => item.slug === "dataoric-take-home");
-
-  const handleBackHome = () => {
-    window.location.href = "/#play";
-  };
-
+  const project = getPlayProject("dataoric-take-home");
   if (!project) return null;
 
+  const { prev, next } = adjacentTakeHomes(project.slug);
+
   return (
-    <div className="case-backdrop">
-      <div className="case-modal">
-        <div className="case-topbar">
-          <button type="button" className="case-icon-btn" aria-label="Back home" onClick={handleBackHome}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M3 11.5 12 4l9 7.5M5.5 10.5V20h13v-9.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-          <span className="case-kicker">Take-home project</span>
+    <>
+      <PlayArticleHeader
+        slug={project.slug}
+        title="Datoric Work Sample"
+        crumb="DATORIC"
+        logo="/corgi/datoric/datoric-logo.png"
+        kicker=""
+        deck="Datoric, previously Arzule (YC S26). Arzule is a B2B partnership intelligence platform that provides ongoing research and reports for companies. They have since pivoted to custom training data for AI models."
+        compact
+      />
+
+      <section className="play-article-block">
+        <span className="play-article-kicker">The problem</span>
+        <p>
+          Arzule wanted to grow its customer base through warm introductions
+          to B2B SaaS companies. The challenge was finding companies that were
+          a strong fit and had a real reason to explore Arzule.
+        </p>
+      </section>
+
+      <section className="play-article-block">
+        <span className="play-article-kicker">What I did</span>
+        <p>
+          I started with people and companies already in my network, then
+          researched their products, partnerships, and growth teams to see
+          where Arzule could actually be useful. From there, I narrowed it
+          down to the strongest opportunities and reached out to gauge
+          interest before making an introduction.
+        </p>
+      </section>
+
+      <section className="play-article-block">
+        <span className="play-article-kicker">The work sample</span>
+      </section>
+
+      <section className="play-article-sample">
+        <div className="play-article-sample-heading">
+          <span>01</span>
+          <strong>Warm introductions</strong>
         </div>
-
-        <div className="case-hero">
-          <div className="case-hero-left">
-            <div className="case-brand">
-              <div className="case-logo">
-                {project.logo ? (
-                  <img src={project.logo} alt="" width={40} height={40} />
-                ) : (
-                  <Image src="/corgi/datoric/datoric-logo.png" alt="" width={40} height={40} />
-                )}
-              </div>
-              <h1 className="case-title">{project.companyLabel ?? project.title}</h1>
+        <p>
+          I ultimately introduced Arzule to Dyneti and Supermemory. For each
+          company, I documented why I thought they were a good fit, who I
+          approached, the context behind the relationship, and how I
+          introduced Arzule into the conversation.
+        </p>
+        <div className="play-article-pair">
+          {introductions.map((company) => (
+            <div key={company.name} className="play-article-intro">
+              <img src={company.logo} alt="" />
+              <strong>{company.name}</strong>
+              <span>{company.line}</span>
             </div>
-
-            <p className="case-desc">{project.description}</p>
-
-            <div className="case-meta-grid">
-              <div className="case-meta-item"><span>Timeline</span><p>{project.timeline}</p></div>
-              <div className="case-meta-item"><span>Role</span><p>{project.role}</p></div>
-              <div className="case-meta-item"><span>Type</span><p>{project.type ?? "Take-home Assignment"}</p></div>
-              <div className="case-meta-item"><span>Focus</span><p>{project.summary}</p></div>
-            </div>
-          </div>
-
-          <div className="case-hero-right dataoric-brief-preview">
-            <div className="dataoric-brief-sheet">
-              <span>{project.companyLabel ?? "Project"}</span>
-              <strong>{project.summary}</strong>
-              <small>{project.timeline}</small>
-              <div className="dataoric-brief-rule" />
-              <p>{project.role}</p>
-            </div>
-          </div>
+          ))}
         </div>
+      </section>
 
-        <div className="case-divider" />
-
-        {project.detailSections?.map((section) => (
-          <div key={section.heading} className="case-section">
-            <span className="case-kicker">{section.heading}</span>
-            <h2 className="case-statement">{section.body[0]}</h2>
-            {section.body.slice(1).map((paragraph) => (
-              <p key={paragraph} className="case-body">
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        ))}
-
-        <div className="case-footer">
-          <Link href="/play/corgi-take-home" className="case-footer-link">
-            ← Previous — Corgi
+      <nav className="play-article-pager">
+        {prev ? (
+          <Link href={`/play/${prev.slug}`}>
+            ← {prev.companyLabel || prev.title}
           </Link>
-          <Link href="/play/dyneti-take-home" className="case-footer-link">
-            Next — Dyneti →
+        ) : (
+          <span />
+        )}
+        {next ? (
+          <Link href={`/play/${next.slug}`}>
+            {next.companyLabel || next.title} →
           </Link>
-        </div>
-      </div>
-    </div>
+        ) : null}
+      </nav>
+    </>
   );
 }
