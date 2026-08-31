@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
+import { get, put } from "@vercel/blob";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -10,9 +11,12 @@ export type StickyNote = {
   createdAt: string;
 };
 
+const NOTES_BLOB = "sticky-notes.json";
 const NOTES_PATH = path.join(process.cwd(), "data", "sticky-notes.json");
 const MAX_NOTES = 40;
 const MAX_LENGTH = 240;
+
+const jsonHeaders = { "Cache-Control": "no-store" };
 
 let writeLock = Promise.resolve();
 
@@ -29,9 +33,8 @@ function sanitize(text: string) {
   return text.replace(/\s+/g, " ").trim().slice(0, MAX_LENGTH);
 }
 
-async function readNotes(): Promise<StickyNote[]> {
+function parseNotes(raw: string): StickyNote[] {
   try {
-    const raw = await fs.readFile(NOTES_PATH, "utf8");
     const parsed = JSON.parse(raw) as StickyNote[];
     return Array.isArray(parsed) ? parsed : [];
   } catch {
@@ -39,14 +42,46 @@ async function readNotes(): Promise<StickyNote[]> {
   }
 }
 
+async function readNotes(): Promise<StickyNote[]> {
+  if (process.env.BLOB_READ_WRITE_TOKEN) {
+    const result = await get(NOTES_BLOB, {
+      access: "private",
+      useCache: false,
+    });
+    if (!result || result.statusCode !== 200 || !result.stream) return [];
+    const raw = await new Response(result.stream).text();
+    return parseNotes(raw);
+  }
+
+  try {
+    const raw = await fs.readFile(NOTES_PATH, "utf8");
+    return parseNotes(raw);
+  } catch {
+    return [];
+  }
+}
+
 async function writeNotes(notes: StickyNote[]) {
+  const body = `${JSON.stringify(notes, null, 2)}\n`;
+
+  if (process.env.BLOB_READ_WRITE_TOKEN) {
+    await put(NOTES_BLOB, body, {
+      access: "private",
+      addRandomSuffix: false,
+      allowOverwrite: true,
+      contentType: "application/json",
+      cacheControlMaxAge: 60,
+    });
+    return;
+  }
+
   await fs.mkdir(path.dirname(NOTES_PATH), { recursive: true });
-  await fs.writeFile(NOTES_PATH, `${JSON.stringify(notes, null, 2)}\n`);
+  await fs.writeFile(NOTES_PATH, body);
 }
 
 export async function GET() {
   const notes = await readNotes();
-  return Response.json(notes);
+  return Response.json(notes, { headers: jsonHeaders });
 }
 
 export async function POST(request: Request) {
@@ -68,7 +103,7 @@ export async function POST(request: Request) {
     return next;
   });
 
-  return Response.json(note);
+  return Response.json(note, { headers: jsonHeaders });
 }
 
 export async function PATCH(request: Request) {
@@ -94,7 +129,7 @@ export async function PATCH(request: Request) {
     return Response.json({ error: "Note not found." }, { status: 404 });
   }
 
-  return Response.json(note);
+  return Response.json(note, { headers: jsonHeaders });
 }
 
 export async function DELETE(request: Request) {
@@ -117,5 +152,5 @@ export async function DELETE(request: Request) {
     return Response.json({ error: "Note not found." }, { status: 404 });
   }
 
-  return Response.json({ ok: true });
+  return Response.json({ ok: true }, { headers: jsonHeaders });
 }

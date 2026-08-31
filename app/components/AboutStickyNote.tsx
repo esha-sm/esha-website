@@ -61,7 +61,7 @@ export function AboutStickyNote() {
 
     const load = async () => {
       try {
-        const response = await fetch("/api/notes");
+        const response = await fetch("/api/notes", { cache: "no-store" });
         if (!response.ok) throw new Error("bad response");
         const data = (await response.json()) as Note[];
         if (Array.isArray(data)) {
@@ -82,6 +82,10 @@ export function AboutStickyNote() {
     };
 
     void load();
+    const poll = window.setInterval(() => {
+      if (window.location.hash === "#about") void load();
+    }, 8000);
+    return () => window.clearInterval(poll);
   }, []);
 
   useEffect(() => {
