@@ -1,7 +1,5 @@
 # Esha Mittal
 
-Personal portfolio for Esha Mittal, featuring work in strategy, data, venture, neuroscience research, and AI/ML.
-
 **Live site:** [eshamittal.com](https://eshamittal.com)
 
 ## Getting Started
