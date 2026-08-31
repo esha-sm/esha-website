@@ -218,7 +218,7 @@ export const playProjects: PlayProject[] = [
     tags: ["React", "UI", "CSS"],
     timeline: "Ongoing",
     role: "Design + code",
-    url: "#",
+    url: "https://github.com/esha-sm/esha-portfolio",
   },
 ];
 

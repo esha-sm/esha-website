@@ -28,32 +28,8 @@ export function PageScroll() {
     sync();
     window.addEventListener("hashchange", sync);
 
-    const onWheel = (event: WheelEvent) => {
-      const id = activeId();
-      if (!id) return;
-      if ((event.target as HTMLElement | null)?.closest(".sticky-note")) {
-        return;
-      }
-
-      const section = document.getElementById(id);
-      if (!section) return;
-
-      const max = section.scrollHeight - section.clientHeight;
-      if (max <= 0) return;
-
-      let delta = event.deltaY;
-      if (event.deltaMode === 1) delta *= 16;
-      if (event.deltaMode === 2) delta *= section.clientHeight;
-
-      event.preventDefault();
-      section.scrollTop = Math.min(max, Math.max(0, section.scrollTop + delta));
-    };
-
-    window.addEventListener("wheel", onWheel, { passive: false, capture: true });
-
     return () => {
       window.removeEventListener("hashchange", sync);
-      window.removeEventListener("wheel", onWheel, { capture: true });
       root.classList.remove("is-page-scroll");
     };
   }, []);

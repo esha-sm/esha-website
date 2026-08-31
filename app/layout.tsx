@@ -3,7 +3,7 @@ import { SidebarFoldProvider } from "./components/SectionLayout";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Esha Mittal",
+  title: "esha's website",
   description: "Portfolio of Esha Mittal.",
 };
 

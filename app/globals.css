@@ -73,6 +73,7 @@ html.is-page-scroll #writings {
   overflow-x: hidden;
   overflow-y: scroll;
   overscroll-behavior: contain;
+  scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: #c1c1c1 transparent;
 }
@@ -483,6 +484,7 @@ html.is-page-scroll #writings .about-reference-article {
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
+  scroll-behavior: smooth;
   touch-action: pan-y;
   scrollbar-width: thin;
   scrollbar-color: #c1c1c1 transparent;
@@ -521,7 +523,7 @@ html.is-page-scroll #writings .about-reference-article {
 
 .about-me-title {
   max-width: 720px;
-  margin: 16px 0 32px;
+  margin: 28px 0 32px;
   padding: 0 0 10px;
   border-bottom: 1px solid var(--site-rule);
   color: var(--site-blue);
