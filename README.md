@@ -1,6 +1,6 @@
 # Esha Mittal
 
-**Live site:** [eshamittal.com](https://eshamittal.com)
+**check it out here:** [eshamittal.com](https://eshamittal.com)
 
 ## Getting Started
 
