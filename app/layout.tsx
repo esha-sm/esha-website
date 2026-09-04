@@ -8,16 +8,16 @@ export const metadata: Metadata = {
   description: "Portfolio of Esha Mittal.",
   openGraph: {
     type: "website",
-    url: "https://eshamittal.com",
     siteName: "esha's website",
     title: "esha's website",
     description: "Portfolio of Esha Mittal.",
     images: [
       {
-        url: "/og.png?v=2",
+        url: "https://eshamittal.com/share.png",
         width: 1200,
         height: 630,
         alt: "esha's website",
+        type: "image/png",
       },
     ],
   },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "esha's website",
     description: "Portfolio of Esha Mittal.",
-    images: ["/og.png?v=2"],
+    images: ["https://eshamittal.com/share.png"],
   },
 };
 
