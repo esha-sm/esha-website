@@ -460,13 +460,47 @@ export default function Home() {
 
 
         {/* =========================
+            ARTICLE 02
+        ========================= */}
+
+        <div className="article-card is-upcoming">
+          <div className="article-top">
+            <span>
+              02
+            </span>
+
+            <span>
+              SUBSTACK
+            </span>
+          </div>
+
+          <div className="article-content">
+            <h3>
+              If I can&apos;t control which thoughts appear, what can I control?
+            </h3>
+
+            <p>
+              The neuroscience of negative thoughts, why your brain holds onto
+              them, and what you can actually do about it.
+            </p>
+          </div>
+
+          <div className="article-bottom">
+            <span>
+              COMING SOON
+            </span>
+          </div>
+        </div>
+
+
+        {/* =========================
             COMING SOON
         ========================= */}
 
         <div className="article-card writing-coming-soon">
           <div className="article-top">
             <span>
-              02
+              03
             </span>
 
             <span>

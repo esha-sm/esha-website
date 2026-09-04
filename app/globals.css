@@ -973,6 +973,14 @@ html.is-page-scroll #writings .about-reference-article {
   line-height: 1.55;
 }
 
+.article-card.is-upcoming {
+  cursor: default;
+}
+
+.article-card.is-upcoming:hover {
+  opacity: 1;
+}
+
 .article-card.writing-coming-soon {
   cursor: default;
 }
