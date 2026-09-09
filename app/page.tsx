@@ -218,7 +218,7 @@ export default function Home() {
                   GitHub
                 </a>
                 <a
-                  href="https://x.com/"
+                  href="https://x.com/eshamittall"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

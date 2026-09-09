@@ -23,6 +23,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@eshamittall",
+    creator: "@eshamittall",
     title: "esha's website",
     description: "Portfolio of Esha Mittal.",
     images: ["https://eshamittal.com/share.png"],
