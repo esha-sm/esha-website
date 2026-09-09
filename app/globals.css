@@ -182,12 +182,46 @@ html.is-page-scroll #writings .about-reference-article {
 }
 
 .open-book {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  position: relative;
+  display: block;
   width: min(1080px, 100%);
   min-height: min(650px, calc(100vh - 88px));
   background: #ffffff;
   box-shadow: 0 5px 22px rgba(28, 46, 82, 0.08);
+}
+
+.book-face {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  min-height: min(650px, calc(100vh - 88px));
+  background: #ffffff;
+  transform-origin: center;
+  transition: transform 0.55s ease;
+}
+
+.book-face--front {
+  transform: scaleX(1);
+}
+
+.book-face--back {
+  position: absolute;
+  inset: 0;
+  transform: scaleX(0);
+}
+
+.open-book.is-flipped .book-face--front {
+  transform: scaleX(0);
+  pointer-events: none;
+}
+
+.open-book.is-flipped .book-face--back {
+  transform: scaleX(1);
+  pointer-events: auto;
+}
+
+.open-book:not(.is-flipped) .book-face--back {
+  pointer-events: none;
 }
 
 .book-page {
@@ -222,13 +256,6 @@ html.is-page-scroll #writings .about-reference-article {
   margin-top: auto;
   padding-top: 18px;
   border-top: 1px solid var(--site-rule);
-}
-
-.local-time {
-  font-family: var(--site-mono);
-  font-size: 10px;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
 }
 
 .book-page-heading {
@@ -296,11 +323,65 @@ html.is-page-scroll #writings .about-reference-article {
   line-height: 1.65;
 }
 
+.book-now {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  margin: auto 0;
+}
+
+.book-now-block span {
+  display: block;
+  margin: 0 0 10px;
+  color: var(--site-blue);
+  font-family: var(--site-mono);
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.book-now-block ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.book-now-block li {
+  padding: 8px 0;
+  border-top: 1px dotted #b9c5d9;
+  color: var(--site-ink);
+  font-family: var(--site-serif);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.book-now-block li:last-child {
+  border-bottom: 1px dotted #b9c5d9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-face {
+    transition: none;
+  }
+}
+
 .open-book.is-closed {
   display: block;
   width: min(540px, 100%);
   background: var(--site-blue);
   box-shadow: 0 8px 26px rgba(28, 46, 82, 0.16);
+  transform: none;
+}
+
+.open-book.is-closed .book-face--front {
+  display: block;
+  min-height: min(650px, calc(100vh - 88px));
+  background: var(--site-blue);
+}
+
+.open-book.is-closed .book-face--back {
+  display: none;
 }
 
 .open-book.is-closed .book-page--index {
@@ -1116,18 +1197,12 @@ html.is-page-scroll #writings .about-reference-article {
   color: var(--site-blue-deep);
 }
 
-.contact-content .local-time {
-  display: block;
-  margin-top: 18px;
-  color: var(--site-muted);
-}
-
 /* =========================
    RESPONSIVE
 ========================= */
 
 @media (max-width: 760px) {
-  .open-book {
+  .book-face {
     grid-template-columns: 1fr;
     min-height: auto;
   }

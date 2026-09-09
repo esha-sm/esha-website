@@ -5,8 +5,8 @@ import { SectionLayout } from "./components/SectionLayout";
 import { AboutIntro } from "./components/AboutIntro";
 import { AboutStickyNote } from "./components/AboutStickyNote";
 import { PageScroll } from "./components/PageScroll";
-import { LocalTime } from "./components/LocalTime";
 import { playProjects } from "../lib/playProjects";
+import { nowLists } from "../lib/now";
 
 export default function Home() {
   const substackUrl = "https://substack.com/home/post/p-206762963";
@@ -20,6 +20,7 @@ export default function Home() {
   const [showArticleReader, setShowArticleReader] =
     useState(false);
   const [isBookOpen, setIsBookOpen] = useState(false);
+  const [isPageFlipped, setIsPageFlipped] = useState(false);
   const bookAudioCtxRef = useRef<AudioContext | null>(null);
   const bookSoundBufferRef = useRef<AudioBuffer | null>(null);
   const bookFallbackRef = useRef<HTMLAudioElement | null>(null);
@@ -46,6 +47,20 @@ export default function Home() {
       void ctx.close();
     };
   }, []);
+
+  const closeBook = () => {
+    setIsBookOpen(false);
+    setIsPageFlipped(false);
+  };
+
+  useEffect(() => {
+    if (!isBookOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeBook();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isBookOpen]);
 
   const playBookSound = () => {
     const ctx = bookAudioCtxRef.current;
@@ -76,15 +91,32 @@ export default function Home() {
   return (
     <>
       <PageScroll />
-      <main id="home" className="home">
+      <main
+        id="home"
+        className="home"
+        onClick={(event) => {
+          if (!isBookOpen) return;
+          if (event.target === event.currentTarget) closeBook();
+        }}
+      >
         <audio
           ref={bookFallbackRef}
           src="/sounds/mixkit-pen-click-and-release-1115.wav"
           preload="auto"
           hidden
         />
-        <div className="book-stage">
-          <div className={`open-book ${isBookOpen ? "is-open" : "is-closed"}`} aria-label="Portfolio index">
+        <div
+          className="book-stage"
+          onClick={(event) => {
+            if (!isBookOpen) return;
+            if (event.target === event.currentTarget) closeBook();
+          }}
+        >
+          <div
+            className={`open-book ${isBookOpen ? "is-open" : "is-closed"}${isPageFlipped ? " is-flipped" : ""}`}
+            aria-label="Portfolio index"
+          >
+            <div className="book-face book-face--front">
           <section className="book-page book-page--title">
             <div className="book-page-topline">
           
@@ -96,7 +128,6 @@ export default function Home() {
             </div>
 
             <div className="book-page-footer">
-              <LocalTime />
               <span>ESHA MITTAL</span>
             </div>
           </section>
@@ -121,19 +152,76 @@ export default function Home() {
               <span>UPDATED AUG 2026</span>
             </div>
           </section>
+            </div>
+
+            <div className="book-face book-face--back" aria-hidden={!isPageFlipped}>
+              <section className="book-page">
+                <div className="book-page-topline">
+                  <span>THE OTHER SIDE</span>
+                </div>
+                <div className="book-now">
+                  {nowLists.slice(0, 2).map((list) => (
+                    <div key={list.heading} className="book-now-block">
+                      <span>{list.heading}</span>
+                      <ul>
+                        {list.items.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+                <div className="book-page-footer">
+                  <span>ESHA MITTAL</span>
+                </div>
+              </section>
+              <section className="book-page book-page--index">
+                <div className="book-page-topline">
+                  <span />
+                </div>
+                <div className="book-now">
+                  {nowLists.slice(2).map((list) => (
+                    <div key={list.heading} className="book-now-block">
+                      <span>{list.heading}</span>
+                      <ul>
+                        {list.items.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+                <div className="book-page-footer">
+                  <span />
+                  <span>NOW</span>
+                </div>
+              </section>
+            </div>
         </div>
           <button
             type="button"
             className="book-toggle"
             onClick={() => {
               playBookSound();
-              setIsBookOpen((open) => !open);
+              if (!isBookOpen) {
+                setIsBookOpen(true);
+                return;
+              }
+              setIsPageFlipped((flipped) => !flipped);
             }}
             aria-expanded={isBookOpen}
-            aria-label={isBookOpen ? "Flip book closed" : "Flip book open"}
+            aria-label={
+              !isBookOpen
+                ? "Flip book open"
+                : isPageFlipped
+                  ? "Flip page back"
+                  : "Flip page over"
+            }
           >
             <span>FLIP</span>
-            <strong aria-hidden="true">{isBookOpen ? "‹" : "›"}</strong>
+            <strong aria-hidden="true">
+              {isBookOpen && !isPageFlipped ? "‹" : "›"}
+            </strong>
           </button>
         </div>
 
@@ -226,7 +314,6 @@ export default function Home() {
                   X
                 </a>
               </div>
-              <LocalTime />
             </div>
             </AboutIntro>
           </article>
