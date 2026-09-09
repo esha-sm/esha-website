@@ -5,6 +5,7 @@ import { SectionLayout } from "./components/SectionLayout";
 import { AboutIntro } from "./components/AboutIntro";
 import { AboutStickyNote } from "./components/AboutStickyNote";
 import { PageScroll } from "./components/PageScroll";
+import { LocalTime } from "./components/LocalTime";
 import { playProjects } from "../lib/playProjects";
 
 export default function Home() {
@@ -95,7 +96,7 @@ export default function Home() {
             </div>
 
             <div className="book-page-footer">
-              <span>San Francisco, CA</span>
+              <LocalTime />
               <span>ESHA MITTAL</span>
             </div>
           </section>
@@ -225,6 +226,7 @@ export default function Home() {
                   X
                 </a>
               </div>
+              <LocalTime />
             </div>
             </AboutIntro>
           </article>

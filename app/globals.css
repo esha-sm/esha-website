@@ -224,6 +224,13 @@ html.is-page-scroll #writings .about-reference-article {
   border-top: 1px solid var(--site-rule);
 }
 
+.local-time {
+  font-family: var(--site-mono);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
 .book-page-heading {
   margin: auto 0 62px;
 }
@@ -1107,6 +1114,12 @@ html.is-page-scroll #writings .about-reference-article {
 
 .contact-links a:hover {
   color: var(--site-blue-deep);
+}
+
+.contact-content .local-time {
+  display: block;
+  margin-top: 18px;
+  color: var(--site-muted);
 }
 
 /* =========================
