@@ -294,18 +294,7 @@ html.is-page-scroll #writings .about-reference-article {
 
 .book-title-content h2 span {
   display: block;
-  width: max-content;
-  max-width: none;
   white-space: nowrap;
-  transform-origin: left center;
-}
-
-.book-title-content h2 span:nth-child(1) {
-  transform: scaleX(1.74);
-}
-
-.book-title-content h2 span:nth-child(2) {
-  transform: scaleX(1.6);
 }
 
 .book-title-content p {
