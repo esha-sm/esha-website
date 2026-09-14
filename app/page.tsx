@@ -90,8 +90,12 @@ export default function Home() {
             </div>
 
             <div className="book-title-content">
-              <h2>Hi, I&apos;m Esha.</h2>
-              <p>Welcome to my little space. Have fun</p>
+              <h2>
+                <span>Hi,</span>
+                <span>I&apos;m</span>
+                <span>Esha.</span>
+              </h2>
+              <p>Welcome to my little space. Have fun!</p>
             </div>
 
             <div className="book-page-footer">
