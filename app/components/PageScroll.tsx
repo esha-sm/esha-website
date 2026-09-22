@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const SECTION_IDS = ["about", "play", "writings"] as const;
+const SECTION_IDS = ["about", "play", "writings", "lab"] as const;
 
 export function PageScroll() {
   useEffect(() => {

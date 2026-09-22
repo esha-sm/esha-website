@@ -69,7 +69,8 @@ html.is-page-scroll body {
 
 html.is-page-scroll #about,
 html.is-page-scroll #play,
-html.is-page-scroll #writings {
+html.is-page-scroll #writings,
+html.is-page-scroll #lab {
   overflow-x: hidden;
   overflow-y: scroll;
   overscroll-behavior: contain;
@@ -80,26 +81,30 @@ html.is-page-scroll #writings {
 
 html.is-page-scroll #about::-webkit-scrollbar,
 html.is-page-scroll #play::-webkit-scrollbar,
-html.is-page-scroll #writings::-webkit-scrollbar {
+html.is-page-scroll #writings::-webkit-scrollbar,
+html.is-page-scroll #lab::-webkit-scrollbar {
   width: 4px;
 }
 
 html.is-page-scroll #about::-webkit-scrollbar-track,
 html.is-page-scroll #play::-webkit-scrollbar-track,
-html.is-page-scroll #writings::-webkit-scrollbar-track {
+html.is-page-scroll #writings::-webkit-scrollbar-track,
+html.is-page-scroll #lab::-webkit-scrollbar-track {
   background: transparent;
 }
 
 html.is-page-scroll #about::-webkit-scrollbar-thumb,
 html.is-page-scroll #play::-webkit-scrollbar-thumb,
-html.is-page-scroll #writings::-webkit-scrollbar-thumb {
+html.is-page-scroll #writings::-webkit-scrollbar-thumb,
+html.is-page-scroll #lab::-webkit-scrollbar-thumb {
   background: #c1c1c1;
   border-radius: 999px;
 }
 
 html.is-page-scroll #about .about-reference-layout,
 html.is-page-scroll #play .about-reference-layout,
-html.is-page-scroll #writings .about-reference-layout {
+html.is-page-scroll #writings .about-reference-layout,
+html.is-page-scroll #lab .about-reference-layout {
   height: max-content;
   min-height: calc(100% + 160px);
   grid-template-rows: auto;
@@ -108,7 +113,8 @@ html.is-page-scroll #writings .about-reference-layout {
 
 html.is-page-scroll #about .about-reference-rail,
 html.is-page-scroll #play .about-reference-rail,
-html.is-page-scroll #writings .about-reference-rail {
+html.is-page-scroll #writings .about-reference-rail,
+html.is-page-scroll #lab .about-reference-rail {
   height: auto;
   min-height: 100%;
   align-self: stretch;
@@ -116,7 +122,8 @@ html.is-page-scroll #writings .about-reference-rail {
 
 html.is-page-scroll #about .about-reference-article,
 html.is-page-scroll #play .about-reference-article,
-html.is-page-scroll #writings .about-reference-article {
+html.is-page-scroll #writings .about-reference-article,
+html.is-page-scroll #lab .about-reference-article {
   height: auto;
   min-height: 100%;
   overflow: visible;
@@ -342,7 +349,8 @@ html.is-page-scroll #writings .about-reference-article {
 
 .about-section,
 .play-section,
-.writings-section {
+.writings-section,
+.lab-section {
   background: #ffffff;
 }
 
@@ -806,7 +814,8 @@ html.is-page-scroll #writings .about-reference-article {
 ========================= */
 
 .play-section .about-reference-article,
-.writings-section .about-reference-article {
+.writings-section .about-reference-article,
+.lab-section .about-reference-article {
   padding-top: 44px;
 }
 

@@ -116,6 +116,7 @@ export default function Home() {
               <a href="#about"><span>01</span><strong>About</strong><i>→</i></a>
               <a href="#play"><span>02</span><strong>Play</strong><i>→</i></a>
               <a href="#writings"><span>03</span><strong>Writings</strong><i>→</i></a>
+              <a href="#lab"><span>04</span><strong>Lab</strong><i>→</i></a>
             </nav>
 
             <div className="book-page-footer">
@@ -200,7 +201,7 @@ export default function Home() {
               <div className="contact-links" aria-label="Contact links">
                 <a href="mailto:emittal@asu.edu">Email</a>
                 <a
-                  href="https://www.linkedin.com/"
+                  href="https://www.linkedin.com/in/emittal/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -517,6 +518,27 @@ export default function Home() {
             </h3>
           </div>
         </div>
+          </article>
+        </SectionLayout>
+      </section>
+
+
+      {/* =========================
+          LAB
+      ========================= */}
+
+      <section
+        id="lab"
+        className="lab-section"
+      >
+        <SectionLayout active="lab">
+
+          <article className="about-reference-article">
+            <div className="about-reference-breadcrumb">
+              <span>CONTENTS</span>
+              <span>/</span>
+              <strong>LAB</strong>
+            </div>
           </article>
         </SectionLayout>
       </section>
