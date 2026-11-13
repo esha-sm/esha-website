@@ -1147,12 +1147,9 @@ html.is-page-scroll #lab .about-reference-article {
   font-weight: 500;
 }
 
-/* Height, not width: most of these are square icons, but XLR8's is a wide
-   wordmark that a square box would shrink until it was unreadable. */
 .mini-project-logo {
-  width: auto;
+  width: 20px;
   height: 20px;
-  max-width: 72px;
   object-fit: contain;
   border-radius: 4px;
   flex-shrink: 0;
@@ -1495,9 +1492,8 @@ html.is-page-scroll #lab .about-reference-article {
 
 .play-article-logo {
   display: block;
-  width: auto;
+  width: 48px;
   height: 48px;
-  max-width: 150px;
   margin: 28px 0 0;
   object-fit: contain;
 }

@@ -14,9 +14,9 @@ export default function Xlr8TakeHome() {
         slug={project.slug}
         title="XLR8 AI Work Sample"
         crumb="XLR8 AI"
-        logo="/xlr8/xlr8-logo.png"
+        logo="/xlr8/xlr8-logo.jpg"
         kicker=""
-        deck="XLR8 AI is a generative engine optimization platform. It tracks how brands show up in AI search answers and exposes the citation sources sitting behind them."
+        deck="XLR8 AI is a generative engine optimization platform for AI search visibility."
         compact
       />
 

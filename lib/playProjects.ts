@@ -65,7 +65,7 @@ export const playProjects: PlayProject[] = [
   },
   {
     slug: "xlr8-take-home",
-    logo: "/xlr8/xlr8-logo.png",
+    logo: "/xlr8/xlr8-logo.jpg",
     companyLabel: "XLR8 AI",
     type: "GEO Strategy",
     summary:
