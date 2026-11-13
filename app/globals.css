@@ -457,10 +457,6 @@ html.is-page-scroll #lab .about-reference-article {
     display: none;
   }
 
-  .lab-flower-field {
-    display: none;
-  }
-
   .about-intro-body {
     opacity: 1;
     transform: none;
@@ -827,51 +823,6 @@ html.is-page-scroll #lab .about-reference-article {
   padding-top: 44px;
 }
 
-.lab-flower-field {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.lab-flower {
-  position: absolute;
-  display: block;
-  width: var(--flower-size);
-  aspect-ratio: 1;
-  opacity: 0;
-}
-
-.lab-flower svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 1px 1px rgba(50, 40, 50, 0.12));
-}
-
-#lab:target .lab-flower {
-  animation-name: lab-flower-fall;
-  animation-timing-function: linear;
-  animation-fill-mode: both;
-}
-
-@keyframes lab-flower-fall {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, -3vh, 0) rotate(0deg);
-  }
-
-  5% {
-    opacity: 0.78;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate3d(var(--flower-drift), calc(105vh - var(--flower-top)), 0) rotate(var(--flower-spin));
-  }
-}
-
 .lab-project-title {
   display: block;
   width: fit-content;
@@ -909,6 +860,183 @@ html.is-page-scroll #lab .about-reference-article {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
   line-height: 1.6;
+}
+
+.lab-landing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(220px, 280px);
+  gap: 28px;
+  align-items: center;
+  margin-top: 18px;
+  max-width: 960px;
+}
+
+.lab-copy-stack {
+  min-width: 0;
+}
+
+.lab-neuron-panel {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--site-ink);
+  cursor: pointer;
+  overflow: visible;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.lab-neuron-panel:hover {
+  transform: translateY(-1px);
+  opacity: 0.96;
+}
+
+.lab-neuron-panel svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.45;
+}
+
+.lab-neuron-path {
+  fill: none;
+  stroke: rgba(17, 17, 17, 0.78);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.3s ease, opacity 0.3s ease;
+}
+
+.lab-neuron-tip {
+  fill: rgba(17, 17, 17, 0.14);
+  stroke: rgba(17, 17, 17, 0.3);
+  stroke-width: 0.7;
+}
+
+.lab-neuron-soma {
+  fill: rgba(255, 255, 255, 0.45);
+  stroke: rgba(17, 17, 17, 0.5);
+  stroke-width: 1.2;
+}
+
+.lab-neuron-soma-inner {
+  fill: rgba(17, 17, 17, 0.04);
+  stroke: rgba(17, 17, 17, 0.22);
+  stroke-width: 1;
+}
+
+.lab-neuron-soma-glow {
+  fill: rgba(17, 17, 17, 0.08);
+}
+
+.lab-neuron-panel.is-firing .lab-neuron-path {
+  stroke: rgba(169, 132, 45, 0.95);
+  stroke-width: 1.8;
+  animation: neuron-path-fire 0.9s ease-in-out 1;
+}
+
+.lab-neuron-panel.is-firing .lab-neuron-tip {
+  fill: rgba(245, 201, 89, 0.9);
+  stroke: rgba(169, 132, 45, 0.9);
+  animation: neuron-tip-fire 0.9s ease-in-out 1;
+}
+
+.lab-neuron-panel.is-firing .lab-neuron-soma {
+  fill: rgba(255, 236, 178, 0.8);
+  stroke: rgba(169, 132, 45, 0.9);
+  animation: neuron-soma-fire 0.9s ease-in-out 1;
+}
+
+.lab-neuron-panel.is-firing .lab-neuron-soma-inner {
+  fill: rgba(255, 219, 108, 0.2);
+  stroke: rgba(169, 132, 45, 0.9);
+  animation: neuron-soma-inner-fire 0.9s ease-in-out 1;
+}
+
+.lab-neuron-panel.is-firing .lab-neuron-soma-glow {
+  fill: rgba(249, 219, 120, 0.9);
+  animation: neuron-glow-fire 0.9s ease-in-out 1;
+}
+
+@keyframes neuron-path-fire {
+  0% {
+    opacity: 0.45;
+    stroke-width: 1.2;
+  }
+  35% {
+    opacity: 1;
+    stroke-width: 2.3;
+  }
+  100% {
+    opacity: 0.8;
+    stroke-width: 1.5;
+  }
+}
+
+@keyframes neuron-tip-fire {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.35;
+  }
+  35% {
+    transform: scale(1.35);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.92;
+  }
+}
+
+@keyframes neuron-soma-fire {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.72;
+  }
+  35% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.94;
+  }
+}
+
+@keyframes neuron-soma-inner-fire {
+  0% {
+    transform: scale(0.88);
+    opacity: 0.7;
+  }
+  35% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.96;
+  }
+}
+
+@keyframes neuron-glow-fire {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.5;
+  }
+  35% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.92;
+  }
 }
 
 .play-section .about-reference-breadcrumb + .recently-published,
@@ -1019,9 +1147,12 @@ html.is-page-scroll #lab .about-reference-article {
   font-weight: 500;
 }
 
+/* Height, not width: most of these are square icons, but XLR8's is a wide
+   wordmark that a square box would shrink until it was unreadable. */
 .mini-project-logo {
-  width: 20px;
+  width: auto;
   height: 20px;
+  max-width: 72px;
   object-fit: contain;
   border-radius: 4px;
   flex-shrink: 0;
@@ -1364,8 +1495,9 @@ html.is-page-scroll #lab .about-reference-article {
 
 .play-article-logo {
   display: block;
-  width: 48px;
+  width: auto;
   height: 48px;
+  max-width: 150px;
   margin: 28px 0 0;
   object-fit: contain;
 }

@@ -5,7 +5,6 @@ import { SectionLayout } from "./components/SectionLayout";
 import { AboutIntro } from "./components/AboutIntro";
 import { AboutStickyNote } from "./components/AboutStickyNote";
 import { PageScroll } from "./components/PageScroll";
-import { LabFlowerFall } from "./components/LabFlowerFall";
 import { playProjects } from "../lib/playProjects";
 
 export default function Home() {
@@ -532,7 +531,6 @@ export default function Home() {
         id="lab"
         className="lab-section"
       >
-        <LabFlowerFall />
         <SectionLayout active="lab">
 
           <article className="about-reference-article">
@@ -542,15 +540,19 @@ export default function Home() {
               <strong>LAB</strong>
             </div>
 
-            <p className="lab-intro">
-              Welcome to my lab! I try to have fun with my ideas here.
-            </p>
+            <div className="lab-landing-grid">
+              <div className="lab-copy-stack">
+                <p className="lab-intro">
+                  Welcome to my lab! I put my messy notes here.
+                </p>
 
-            <div className="lab-project-row">
-              <span className="lab-project-title">
-                The post shop
-              </span>
-              <span className="lab-project-status">(coming soon)</span>
+                <div className="lab-project-row">
+                  <span className="lab-project-title">
+                    The post shop
+                  </span>
+                  <span className="lab-project-status">(coming soon)</span>
+                </div>
+              </div>
             </div>
           </article>
         </SectionLayout>

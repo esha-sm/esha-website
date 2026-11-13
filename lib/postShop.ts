@@ -47,32 +47,11 @@ export const seals = [
     height: 405,
   },
   {
-    id: "rose",
-    label: "Rose",
-    art: "/post-shop/seals/rose.svg",
-    width: 400,
-    height: 419,
-  },
-  {
-    id: "blossom",
-    label: "Blossom",
-    art: "/post-shop/seals/blossom.svg",
-    width: 400,
-    height: 391,
-  },
-  {
     id: "bow",
     label: "Bow",
     art: "/post-shop/seals/bow.svg",
     width: 400,
     height: 392,
-  },
-  {
-    id: "lavender",
-    label: "Lavender",
-    art: "/post-shop/seals/lavender.svg",
-    width: 400,
-    height: 421,
   },
 ] as const;
 

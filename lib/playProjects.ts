@@ -64,6 +64,20 @@ export const playProjects: PlayProject[] = [
     url: "https://github.com/esha-sm/Warmly",
   },
   {
+    slug: "xlr8-take-home",
+    logo: "/xlr8/xlr8-logo.png",
+    companyLabel: "XLR8 AI",
+    type: "GEO Strategy",
+    summary:
+      "A 3-month generative engine optimization engagement built from real citation and visibility data.",
+    description:
+      "Took Fulton & Roark, a real XLR8 AI client, from onboarding through a structured 3-month GEO engagement: diagnosing the visibility gap from the platform's experiment data, building a week-by-week execution plan, and setting the communication and attribution cadence needed to actually run it.",
+    tags: ["GEO", "AI Search", "Strategy", "Client Management"],
+    timeline: "2026",
+    role: "AI search strategy",
+    url: "/play/xlr8-take-home",
+  },
+  {
     slug: "dyneti-take-home",
     logo: "https://www.google.com/s2/favicons?domain=dyneti.com&sz=128",
     companyLabel: "Dyneti",
